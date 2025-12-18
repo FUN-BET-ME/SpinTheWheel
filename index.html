@@ -339,13 +339,24 @@ canvas{
     return "/" + parts[0] + "/"; // repo base
   }
 
-  document.querySelectorAll(".langbtn").forEach(btn=>{
-    btn.addEventListener("click", ()=>{
-      const l = btn.getAttribute("data-lang");
-      const base = getRepoBasePath();
-      const target = (l === "en") ? base : (base + l + "/");
-      window.location.href = target + (window.location.search || "");
-    });
+ document.querySelectorAll(".langbtn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const lang = btn.dataset.lang;
+
+    // GitHub Pages base path
+    const basePath = "/SpinTheWheel";
+
+    let target;
+    if (lang === "en") {
+      target = `${basePath}/`;
+    } else {
+      target = `${basePath}/${lang}/`;
+    }
+
+    window.location.href = target + (window.location.search || "");
+  });
+});
+
   });
 
   const canvas = document.getElementById("wheel");
