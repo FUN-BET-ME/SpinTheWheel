@@ -154,15 +154,20 @@
   const BASE_PATH = "/SpinTheWheel";
   const CLAIM_URL = "https://funbet.me/ru/promotions";
 
-  const prizes = [
-    "€10 Бонус",
-    "€15 Бонус",
-    "€20 Бонус 🎯",
-    "25 Фриспинов",
-    "Сюрприз-бонус",
-    "€12 Бонус"
-  ];
-  const weights = [18, 18, 12, 17, 17, 18];
+ const CLAIM_URL = "https://funbet.me/ru/promotions";
+
+const prizes = [
+  "₽500 Бонус",
+  "₽750 Бонус",
+  "₽1 000 Бонус 🎯",
+  "25 Фриспинов",
+  "Сюрприз-бонус",
+  "₽600 Бонус"
+];
+
+// Keep ₽1 000 slightly rarer
+const weights = [18, 18, 12, 17, 17, 18];
+
 
   const currentParams = new URLSearchParams(window.location.search);
   const claimUrlObj = new URL(CLAIM_URL);
