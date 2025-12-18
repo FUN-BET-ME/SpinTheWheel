@@ -42,7 +42,6 @@
       box-shadow:0 20px 60px rgba(0,0,0,.35);
     }
 
-    /* Hero banner */
     .hero{
       width:100%;
       border-radius:16px;
@@ -72,8 +71,8 @@
     h1{margin:8px 0 6px;font-size:22px;line-height:1.25;}
     p{margin:0 0 14px;color:var(--muted)}
 
-    /* Wheel alignment (fix for mobile) */
     .wheel-area{
+      position:relative;
       display:flex;
       flex-direction:column;
       align-items:center;
@@ -82,13 +81,14 @@
     }
 
     .pointer{
+      position:relative;
+      z-index:10;
       width:0;height:0;
       border-left:14px solid transparent;
       border-right:14px solid transparent;
       border-top:22px solid var(--gold);
       filter:drop-shadow(0 8px 14px rgba(0,0,0,.35));
       margin-bottom:-6px;
-      z-index:3;
     }
 
     canvas{
@@ -132,6 +132,7 @@
       border:1px solid rgba(255,255,255,.14);
       background:rgba(0,0,0,.20);
       display:none;
+      line-height:1.35;
     }
 
     .fine{
@@ -139,6 +140,7 @@
       font-size:12px;
       opacity:.75;
       text-align:center;
+      line-height:1.35;
     }
 
     .langbar{
@@ -166,7 +168,6 @@
 <div class="wrap">
   <div class="card">
 
-    <!-- Hero Banner (3 sizes) -->
     <div class="hero">
       <picture>
         <source media="(min-width:1024px)" srcset="https://funbet.me/content/wp-content/uploads/2025/12/Spin-1920x600-1.jpg">
@@ -200,12 +201,12 @@
       <a id="promoLink" href="#">FunBet.Me Promotions</a> पर भेजा जाएगा।
     </div>
 
-    <!-- Language / GEO switch (keeps query params) -->
+    <!-- FIXED: use clean lang codes, no trailing slashes -->
     <div class="langbar" aria-label="Language">
       <button class="langbtn" data-lang="">EN</button>
-      <button class="langbtn" data-lang="tr/">TR</button>
-      <button class="langbtn" data-lang="in-en/">IN-EN</button>
-      <button class="langbtn" data-lang="in-hi/">IN-HI</button>
+      <button class="langbtn" data-lang="tr">TR</button>
+      <button class="langbtn" data-lang="in-en">IN-EN</button>
+      <button class="langbtn" data-lang="in-hi">IN-HI</button>
     </div>
 
   </div>
@@ -214,6 +215,8 @@
 <script>
   /* ===== CONFIG: INDIA (HI) ===== */
   const CLAIM_URL = "https://funbet.me/hi/promotions";
+  const BASE_PATH = "/SpinTheWheel";
+
   const prizes = [
     "₹300 बोनस",
     "₹500 बोनस 🎯",
@@ -231,19 +234,11 @@
   currentParams.forEach((v,k)=> claimUrlObj.searchParams.set(k,v));
   document.getElementById("promoLink").href = claimUrlObj.toString();
 
-  // Footer language buttons (keeps params)
+  // Footer language buttons (keeps params) - FIXED paths
   document.querySelectorAll(".langbtn").forEach(btn => {
     btn.addEventListener("click", () => {
-      const lang = btn.dataset.lang || ""; // "" means root
-
-      // GitHub Pages base path
-      const basePath = "/SpinTheWheel";
-
-      // Build target: root OR /<lang>/
-      const target = lang === ""
-        ? `${basePath}/`
-        : `${basePath}/${lang}`;
-
+      const lang = (btn.dataset.lang || "").trim(); // "" => root
+      const target = lang === "" ? `${BASE_PATH}/` : `${BASE_PATH}/${lang}/`;
       window.location.href = target + (window.location.search || "");
     });
   });
@@ -313,14 +308,14 @@
     ctx.fillStyle = "rgba(214,179,90,0.95)";
     ctx.font = "800 22px system-ui, -apple-system, Segoe UI, Roboto, Arial";
     ctx.textAlign = "center";
-    ctx.fillText("SPIN", cx, cy+8);
+    ctx.fillText("SPIN", cx, cy+8); /* optional: change to "स्पिन" */
   }
 
   function easeOutCubic(t){ return 1 - Math.pow(1-t, 3); }
 
   function spinToIndex(targetIndex){
     const seg = (Math.PI*2)/prizes.length;
-    const pointerAngle = -Math.PI/2; // top
+    const pointerAngle = -Math.PI/2;
     const targetCenter = pointerAngle - (targetIndex*seg + seg/2);
     const extraTurns = 6;
     const target = targetCenter + extraTurns * Math.PI*2;
