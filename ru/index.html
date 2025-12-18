@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Крути и получай бонус | FunBet.Me</title>
+  <title>Крути и получи бонус | FunBet.Me</title>
 
   <meta name="robots" content="noindex,nofollow" />
 
@@ -59,15 +59,11 @@
       background:rgba(0,0,0,.15);
     }
     .hero-img{width:100%;height:auto;display:block;object-fit:cover;}
-    @media (min-width:1024px){ .hero-img{ max-height:260px; } }
-    @media (max-width:1023px) and (min-width:600px){ .hero-img{ max-height:220px; } }
-    @media (max-width:599px){ .hero-img{ max-height:160px; } }
 
     .top{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:10px;
       margin-bottom:10px;
     }
     .brand img{height:28px;}
@@ -86,6 +82,7 @@
     p{margin:0 0 14px;color:var(--muted);}
 
     .wheel-area{
+      position:relative;
       display:flex;
       flex-direction:column;
       align-items:center;
@@ -108,7 +105,7 @@
       height:auto;
     }
 
-    .btnrow{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;}
+    .btnrow{display:flex;gap:10px;margin-top:12px;}
     button{
       flex:1;
       padding:12px;
@@ -118,7 +115,7 @@
       font-weight:800;
       font-size:15px;
     }
-    .spin{background:linear-gradient(135deg,var(--gold),#f2d37a);color:#2a1a00;}
+    .spin{background:linear-gradient(135deg,var(--gold),#f2d37a);}
     .claim{
       background:rgba(255,255,255,.12);
       color:#fff;
@@ -132,7 +129,6 @@
       border-radius:14px;
       background:rgba(0,0,0,.20);
       display:none;
-      line-height:1.35;
     }
 
     .fine{
@@ -142,7 +138,6 @@
       text-align:center;
       line-height:1.35;
     }
-    a{color:var(--gold);text-decoration:none;}
 
     .langbar{
       display:flex;
@@ -175,13 +170,13 @@
 
   <div class="top">
     <div class="brand">
-      <img src="https://funbet.me/content/wp-content/uploads/2025/12/FUNBET.ME_FINAL_01072025-01.jpg" alt="FunBet.Me">
+      <img src="https://funbet.me/content/wp-content/uploads/2025/12/FUNBET.ME_FINAL_01072025-01.jpg">
     </div>
-    <div class="pill">18+ • Правила применяются</div>
+    <div class="pill">18+ • Правила действуют</div>
   </div>
 
-  <h1>Крути, чтобы открыть бонус 🎁</h1>
-  <p>Крути колесо, узнай свой приз и активируй его на FunBet.Me.</p>
+  <h1>Крутите, чтобы получить бонус 🎁</h1>
+  <p>Крутите колесо, узнайте награду и активируйте её на FunBet.Me.</p>
 
   <div class="wheel-area">
     <div class="pointer"></div>
@@ -196,8 +191,9 @@
   <div class="result" id="resultBox"></div>
 
   <div class="fine">
-    Это промо-страница.
-    <a id="promoLink" href="#">Перейти к акциям</a>
+    Это рекламная прелендинг-страница. После вращения вы будете
+    перенаправлены на
+    <a id="promoLink" href="#" rel="noopener">страницу акций FunBet.Me</a>.
   </div>
 
   <div class="langbar">
@@ -213,92 +209,97 @@
 </div>
 
 <script>
-  // ========= CONFIG (RU / RUB) =========
-  const CLAIM_URL = "https://funbet.me/ru/promotions";
-  const BASE_PATH = "/SpinTheWheel";
+const CLAIM_URL = "https://funbet.me/ru/promotions";
+const BASE_PATH = "/SpinTheWheel";
 
-  const prizes = [
-    "₽500 Бонус",
-    "₽750 Бонус",
-    "₽1 000 Бонус",
-    "25 Фриспинов",
-    "Сюрприз-бонус",
-    "₽600 Бонус"
-  ];
+const prizes = [
+  "₽500 Бонус",
+  "₽750 Бонус",
+  "₽1 000 Бонус 🎯",
+  "25 Фриспинов",
+  "Сюрприз-бонус",
+  "₽600 Бонус"
+];
 
-  const prizeValues = [500, 750, 1000, 0, -1, 600];
-  const weights = [18, 18, 12, 17, 17, 18];
-  // ====================================
+const prizeValues = [500,750,1000,0,-1,600];
+const weights = [18,18,12,17,17,18];
 
-  const params = new URLSearchParams(location.search);
-  const claimUrl = new URL(CLAIM_URL);
-  params.forEach((v,k)=>claimUrl.searchParams.set(k,v));
-  document.getElementById("promoLink").href = claimUrl.toString();
+const params = new URLSearchParams(location.search);
+const claimUrl = new URL(CLAIM_URL);
+params.forEach((v,k)=>claimUrl.searchParams.set(k,v));
+promoLink.href = claimUrl;
 
-  document.querySelectorAll(".langbtn").forEach(b=>{
-    b.onclick=()=>{
-      const l=(b.dataset.lang||"").trim();
-      const t=l===""?`${BASE_PATH}/`:`${BASE_PATH}/${l}/`;
-      location.href=t+(location.search||"");
-    };
+document.querySelectorAll(".langbtn").forEach(b=>{
+  b.onclick=()=>location.href=
+    `${BASE_PATH}/${b.dataset.lang||""}${location.search}`;
+});
+
+const c=wheel,ctx=c.getContext("2d");
+const cx=310,cy=310,r=300;
+let angle=0,spinning=false,win=null;
+
+function pick(){
+  let s=weights.reduce((a,b)=>a+b),x=Math.random()*s;
+  for(let i=0;i<weights.length;i++){ if((x-=weights[i])<=0) return i }
+  return 0;
+}
+
+function draw(){
+  ctx.clearRect(0,0,620,620);
+  const seg=2*Math.PI/prizes.length;
+  prizes.forEach((t,i)=>{
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,r,angle+i*seg,angle+(i+1)*seg);
+    ctx.fillStyle=i%2?"rgba(0,0,0,.2)":"rgba(255,255,255,.1)";
+    ctx.fill();
+    ctx.save();
+    ctx.translate(cx,cy);
+    ctx.rotate(angle+i*seg+seg/2);
+    ctx.fillStyle="#fff";
+    ctx.font="700 22px Arial";
+    ctx.textAlign="right";
+    ctx.fillText(t,r-20,8);
+    ctx.restore();
   });
 
-  const c=wheel,ctx=c.getContext("2d");
-  const cx=310,cy=310,r=300;
-  let angle=0,spinning=false,win=null;
+  ctx.beginPath();
+  ctx.arc(cx,cy,70,0,Math.PI*2);
+  ctx.strokeStyle="rgba(214,179,90,.9)";
+  ctx.lineWidth=6;
+  ctx.stroke();
+  ctx.fillStyle="rgba(214,179,90,.95)";
+  ctx.font="900 24px Arial";
+  ctx.textAlign="center";
+  ctx.textBaseline="middle";
+  ctx.fillText("SPIN",cx,cy);
+}
 
-  function pick(){
-    let s=weights.reduce((a,b)=>a+b),x=Math.random()*s;
-    for(let i=0;i<weights.length;i++){if((x-=weights[i])<=0)return i}
-    return 0;
-  }
+spinBtn.onclick=()=>{
+  if(spinning)return;
+  win=pick();spinning=true;claimBtn.disabled=true;
+  const target=-Math.PI/2-(win*2*Math.PI/prizes.length)+6*2*Math.PI;
+  const start=angle,delta=target-start,t0=performance.now();
+  (function anim(t){
+    const p=Math.min(1,(t-t0)/4200);
+    angle=start+delta*(1-Math.pow(1-p,3));
+    draw();
+    if(p<1)requestAnimationFrame(anim);
+    else{
+      spinning=false;
+      resultBox.innerHTML=`✅ <b>Вы получили:</b> ${prizes[win]}`;
+      resultBox.style.display="block";
+      claimBtn.disabled=false;
+    }
+  })(t0);
+};
 
-  function draw(){
-    ctx.clearRect(0,0,620,620);
-    const seg=2*Math.PI/prizes.length;
-    prizes.forEach((t,i)=>{
-      ctx.beginPath();
-      ctx.moveTo(cx,cy);
-      ctx.arc(cx,cy,r,angle+i*seg,angle+(i+1)*seg);
-      ctx.fillStyle=i%2?"rgba(0,0,0,.20)":"rgba(255,255,255,.10)";
-      ctx.fill();
-      ctx.save();
-      ctx.translate(cx,cy);
-      ctx.rotate(angle+i*seg+seg/2);
-      ctx.fillStyle="#fff";
-      ctx.font="700 22px Arial";
-      ctx.textAlign="right";
-      ctx.fillText(t,r-20,8);
-      ctx.restore();
-    });
-  }
+claimBtn.onclick=()=>{
+  claimUrl.searchParams.set("bonus_value",prizeValues[win]);
+  location.href=claimUrl;
+};
 
-  spinBtn.onclick=()=>{
-    if(spinning)return;
-    win=pick();spinning=true;claimBtn.disabled=true;
-    const seg=2*Math.PI/prizes.length;
-    const target=-Math.PI/2-(win*seg)+6*2*Math.PI;
-    const start=angle,delta=target-start,t0=performance.now();
-    (function anim(t){
-      const p=Math.min(1,(t-t0)/4200);
-      angle=start+delta*(1-Math.pow(1-p,3));
-      draw();
-      if(p<1)requestAnimationFrame(anim);
-      else{
-        spinning=false;
-        resultBox.innerHTML=`✅ <b>Открыто:</b> ${prizes[win]}`;
-        resultBox.style.display="block";
-        claimBtn.disabled=false;
-      }
-    })(t0);
-  };
-
-  claimBtn.onclick=()=>{
-    claimUrl.searchParams.set("bonus_value",String(prizeValues[win]));
-    location.href=claimUrl;
-  };
-
-  draw();
+draw();
 </script>
 </body>
 </html>
