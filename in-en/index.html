@@ -221,3 +221,203 @@
 
       <h1>Spin to unlock your bonus 🎁</h1>
       <p>Tap spin, see your reward, then claim it on FunBet.Me.</p>
+
+      <div class="wheel-area">
+        <div class="pointer"></div>
+        <canvas id="wheel" width="620" height="620"></canvas>
+      </div>
+
+      <div class="btnrow">
+        <button class="spin" id="spinBtn">SPIN</button>
+        <button class="claim" id="claimBtn" disabled>Claim Bonus</button>
+      </div>
+
+      <div class="result" id="resultBox"></div>
+
+      <div class="fine">
+        Promotional pre-landing page. After spinning, you’ll be redirected to
+        <a id="promoLink" href="#" rel="noopener">FunBet.Me Promotions</a>.
+      </div>
+
+      <!-- FIXED: EN is root (data-lang="") -->
+      <div class="langbar" aria-label="Language">
+        <button class="langbtn" data-lang="">EN</button>
+        <button class="langbtn" data-lang="tr">TR</button>
+        <button class="langbtn" data-lang="in-en">IN-EN</button>
+        <button class="langbtn" data-lang="in-hi">IN-HI</button>
+      </div>
+
+      <!-- badge: hide if missing -->
+      <div class="footer-badges">
+        <img
+          src="https://funbet.me/content/wp-content/uploads/2025/12/18plus-badge.png"
+          alt="18+"
+          onerror="this.style.display='none'"
+        />
+      </div>
+
+      <div class="license">
+        Anjouan, License No. ALSI-202508066-F12
+      </div>
+    </div>
+  </div>
+
+<script>
+  // ========= CONFIG (IN-EN / INR) =========
+  const BASE_PATH = "/SpinTheWheel";
+  const CLAIM_URL = "https://funbet.me/en/promotions";
+
+  const prizes = [
+    "₹500 Bonus",
+    "₹750 Bonus",
+    "₹1,000 Bonus 🎯",
+    "25 Free Spins",
+    "Surprise Bonus",
+    "₹600 Bonus"
+  ];
+
+  // Keep ₹1,000 slightly rarer
+  const weights = [18, 18, 12, 17, 17, 18];
+  // =======================================
+
+  // Preserve tracking params into CLAIM_URL
+  const currentParams = new URLSearchParams(window.location.search);
+  const claimUrlObj = new URL(CLAIM_URL);
+  currentParams.forEach((v,k)=> claimUrlObj.searchParams.set(k,v));
+  document.getElementById("promoLink").href = claimUrlObj.toString();
+
+  // Language buttons: fixed GitHub Pages routing (keeps params)
+  document.querySelectorAll(".langbtn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const lang = (btn.dataset.lang || "").trim(); // "" => root
+      const target = lang === "" ? `${BASE_PATH}/` : `${BASE_PATH}/${lang}/`;
+      window.location.href = target + (window.location.search || "");
+    });
+  });
+
+  const canvas = document.getElementById("wheel");
+  const ctx = canvas.getContext("2d");
+  const spinBtn = document.getElementById("spinBtn");
+  const claimBtn = document.getElementById("claimBtn");
+  const resultBox = document.getElementById("resultBox");
+
+  const W = canvas.width, H = canvas.height;
+  const cx = W/2, cy = H/2;
+  const rOuter = 300, rInner = 70;
+
+  let angle = 0;
+  let spinning = false;
+  let landedIndex = null;
+
+  function pickWeightedIndex() {
+    const sum = weights.reduce((a,b)=>a+b,0);
+    let x = Math.random()*sum;
+    for (let i=0;i<weights.length;i++){
+      x -= weights[i];
+      if (x <= 0) return i;
+    }
+    return weights.length-1;
+  }
+
+  function drawWheel() {
+    ctx.clearRect(0,0,W,H);
+
+    ctx.beginPath();
+    ctx.arc(cx,cy,rOuter+10,0,Math.PI*2);
+    ctx.fillStyle = "rgba(214,179,90,0.10)";
+    ctx.fill();
+
+    const seg = (Math.PI * 2) / prizes.length;
+
+    for (let i=0;i<prizes.length;i++){
+      const start = angle + i*seg;
+      const end = start + seg;
+
+      ctx.beginPath();
+      ctx.moveTo(cx,cy);
+      ctx.arc(cx,cy,rOuter,start,end);
+      ctx.closePath();
+      ctx.fillStyle = (i % 2 === 0) ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.18)";
+      ctx.fill();
+
+      ctx.strokeStyle = "rgba(214,179,90,0.28)";
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      ctx.save();
+      ctx.translate(cx,cy);
+      ctx.rotate(start + seg/2);
+      ctx.textAlign = "right";
+      ctx.fillStyle = "#fff";
+      ctx.font = "700 22px system-ui, -apple-system, Segoe UI, Roboto, Arial";
+      ctx.fillText(prizes[i], rOuter - 18, 8);
+      ctx.restore();
+    }
+
+    ctx.beginPath();
+    ctx.arc(cx,cy,rInner,0,Math.PI*2);
+    ctx.fillStyle = "rgba(0,0,0,0.30)";
+    ctx.fill();
+    ctx.strokeStyle = "rgba(214,179,90,0.55)";
+    ctx.lineWidth = 4;
+    ctx.stroke();
+
+    ctx.fillStyle = "rgba(214,179,90,0.95)";
+    ctx.font = "800 22px system-ui, -apple-system, Segoe UI, Roboto, Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("SPIN", cx, cy+8);
+  }
+
+  function easeOutCubic(t){ return 1 - Math.pow(1-t, 3); }
+
+  function spinToIndex(targetIndex){
+    const seg = (Math.PI*2)/prizes.length;
+    const pointerAngle = -Math.PI/2;
+    const targetCenter = pointerAngle - (targetIndex*seg + seg/2);
+    const extraTurns = 6;
+    const target = targetCenter + extraTurns * Math.PI*2;
+
+    const startAngle = angle;
+    const delta = target - startAngle;
+
+    const duration = 4200;
+    const start = performance.now();
+
+    spinning = true;
+    claimBtn.disabled = true;
+    resultBox.style.display = "none";
+    landedIndex = null;
+
+    function frame(now){
+      const t = Math.min(1, (now - start)/duration);
+      angle = startAngle + delta * easeOutCubic(t);
+      drawWheel();
+      if (t < 1) requestAnimationFrame(frame);
+      else {
+        spinning = false;
+        landedIndex = targetIndex;
+        const prize = prizes[targetIndex];
+        resultBox.innerHTML =
+          `✅ <b>Unlocked:</b> ${prize}<br/>Now tap <b>Claim Bonus</b> to activate it on FunBet.Me.`;
+        resultBox.style.display = "block";
+        claimBtn.disabled = false;
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  spinBtn.addEventListener("click", () => {
+    if (spinning) return;
+    spinToIndex(pickWeightedIndex());
+  });
+
+  claimBtn.addEventListener("click", () => {
+    if (claimBtn.disabled) return;
+    if (landedIndex !== null) claimUrlObj.searchParams.set("wheel_prize", prizes[landedIndex]);
+    window.location.href = claimUrlObj.toString();
+  });
+
+  drawWheel();
+</script>
+</body>
+</html>
