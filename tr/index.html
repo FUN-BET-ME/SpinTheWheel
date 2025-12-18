@@ -78,6 +78,7 @@
 
     /* Wheel alignment (mobile-safe) */
     .wheel-area{
+      position:relative;
       display:flex;
       flex-direction:column;
       align-items:center;
@@ -85,18 +86,19 @@
     }
 
     .pointer{
+      position:relative;
+      z-index:10;
       width:0;height:0;
       border-left:14px solid transparent;
       border-right:14px solid transparent;
       border-top:22px solid var(--gold);
       filter:drop-shadow(0 8px 14px rgba(0,0,0,.35));
       margin-bottom:-6px;
-      z-index:3;
     }
 
     canvas{
       display:block;
-      width:min(340px, 100%);
+      width:min(340px, 92vw);
       aspect-ratio:1 / 1;
       height:auto;
       max-width:100%;
@@ -142,6 +144,7 @@
       font-size:12px;
       opacity:.75;
       text-align:center;
+      line-height:1.35;
     }
 
     .langbar{
@@ -203,12 +206,12 @@
       <a id="promoLink" href="#">FunBet.Me Promosyonlar</a> sayfasına yönlendirileceksiniz.
     </div>
 
-    <!-- Language / GEO switch (keeps query params) -->
+    <!-- Language / GEO switch -->
     <div class="langbar" aria-label="Language">
       <button class="langbtn" data-lang="">EN</button>
-      <button class="langbtn" data-lang="tr/">TR</button>
-      <button class="langbtn" data-lang="in-en/">IN-EN</button>
-      <button class="langbtn" data-lang="in-hi/">IN-HI</button>
+      <button class="langbtn" data-lang="tr">TR</button>
+      <button class="langbtn" data-lang="in-en">IN-EN</button>
+      <button class="langbtn" data-lang="in-hi">IN-HI</button>
     </div>
 
   </div>
@@ -217,6 +220,7 @@
 <script>
   /* ===== CONFIG: TURKEY / TR ===== */
   const CLAIM_URL = "https://funbet.me/tr/promotions";
+  const BASE_PATH = "/SpinTheWheel";
 
   const prizes = [
     "₺300 Bonus",
@@ -227,7 +231,6 @@
     "₺250 Bonus"
   ];
 
-  // Keep ₺500 a bit rarer
   const weights = [18, 12, 15, 17, 18, 20];
   /* ================================ */
 
@@ -237,10 +240,11 @@
   currentParams.forEach((v,k)=> claimUrlObj.searchParams.set(k,v));
   document.getElementById("promoLink").href = claimUrlObj.toString();
 
-  // Footer language buttons (keeps params)
-  document.querySelectorAll(".langbtn").forEach(btn=>{
-    btn.addEventListener("click", ()=>{
-      const target = "/" + (btn.getAttribute("data-lang") || "");
+  // Footer language buttons (keeps params) - GitHub Pages root
+  document.querySelectorAll(".langbtn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const lang = (btn.dataset.lang || "").trim(); // "" => root
+      const target = lang === "" ? `${BASE_PATH}/` : `${BASE_PATH}/${lang}/`;
       window.location.href = target + (window.location.search || "");
     });
   });
@@ -310,7 +314,7 @@
     ctx.fillStyle = "rgba(214,179,90,0.95)";
     ctx.font = "800 22px system-ui, -apple-system, Segoe UI, Roboto, Arial";
     ctx.textAlign = "center";
-    ctx.fillText("SPIN", cx, cy+8);
+    ctx.fillText("ÇEVİR", cx, cy+8);
   }
 
   function easeOutCubic(t){ return 1 - Math.pow(1-t, 3); }
