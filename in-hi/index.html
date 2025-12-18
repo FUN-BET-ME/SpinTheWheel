@@ -234,11 +234,24 @@
   document.getElementById("promoLink").href = claimUrlObj.toString();
 
   // Footer language buttons (keeps params)
-  document.querySelectorAll(".langbtn").forEach(btn=>{
-    btn.addEventListener("click", ()=>{
-      const target = "/" + (btn.getAttribute("data-lang") || "");
-      window.location.href = target + (window.location.search || "");
-    });
+ document.querySelectorAll(".langbtn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const lang = btn.dataset.lang;
+
+    // GitHub Pages base path
+    const basePath = "/SpinTheWheel";
+
+    let target;
+    if (lang === "en") {
+      target = `${basePath}/`;
+    } else {
+      target = `${basePath}/${lang}/`;
+    }
+
+    window.location.href = target + (window.location.search || "");
+  });
+});
+
   });
 
   const canvas = document.getElementById("wheel");
