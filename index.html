@@ -1,271 +1,270 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Spin & Unlock Bonus | FunBet.Me</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Spin & Unlock Bonus | FunBet.Me</title>
 
-  <meta name="robots" content="noindex,nofollow" />
+<meta name="robots" content="noindex, nofollow" />
 
-  <style>
-    :root {
-      --bg:#2E004F;
-      --gold:#D6B35A;
-      --card:rgba(255,255,255,.08);
-      --text:#fff;
-    }
+<style>
+:root{
+  --bg:#2E004F;
+  --gold:#D6B35A;
+  --card:rgba(255,255,255,.08);
+  --text:#fff;
+}
 
-    * { box-sizing:border-box; }
+*{box-sizing:border-box}
 
-    body {
-      margin:0;
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:
-        radial-gradient(1200px 700px at 50% 20%, rgba(214,179,90,.25), transparent 60%),
-        var(--bg);
-      color:var(--text);
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-    }
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:
+    radial-gradient(1200px 700px at 50% 20%, rgba(214,179,90,.25), transparent 60%),
+    var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
 
-    .wrap {
-      width:100%;
-      max-width:560px;
-    }
+.wrap{width:100%;max-width:560px}
 
-    .card {
-      background:var(--card);
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:20px;
-      padding:18px;
-      box-shadow:0 20px 60px rgba(0,0,0,.35);
-    }
+.card{
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;
+  padding:18px;
+  box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
 
-    /* ===== PRO HERO BANNER ===== */
-    .hero-banner {
-      width:100%;
-      max-height:360px;
-      object-fit:cover;
-      border-radius:18px;
-      margin-bottom:12px;
-      display:block;
-    }
+/* ===== HERO BANNER ===== */
+.hero-banner{
+  width:100%;
+  max-height:360px;
+  object-fit:cover;
+  border-radius:18px;
+  margin-bottom:12px;
+  display:block;
+}
 
-    @media (max-width:480px) {
-      .hero-banner {
-        max-height:240px;
-        border-radius:16px;
-        margin-bottom:8px;
-      }
-    }
+@media (max-width:1024px){
+  .hero-banner{max-height:300px}
+}
 
-    .top {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:10px;
-    }
+@media (max-width:480px){
+  .hero-banner{
+    max-height:240px;
+    border-radius:16px;
+    margin-bottom:8px;
+  }
+}
 
-    .pill {
-      font-size:12px;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid rgba(214,179,90,.55);
-      color:var(--gold);
-      background:rgba(214,179,90,.1);
-      white-space:nowrap;
-    }
+/* ===== HEADER ===== */
+.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:8px;
+}
 
-    h1 {
-      margin:8px 0 6px;
-      font-size:22px;
-      line-height:1.2;
-    }
+.logo{
+  font-weight:800;
+  letter-spacing:.3px;
+}
 
-    p {
-      margin:0 0 14px;
-      opacity:.92;
-    }
+.pill{
+  font-size:12px;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(214,179,90,.55);
+  color:var(--gold);
+  background:rgba(214,179,90,.1);
+}
 
-    .wheel-area {
-      display:grid;
-      place-items:center;
-      margin:12px 0 6px;
-    }
+/* ===== TEXT ===== */
+h1{
+  margin:8px 0 6px;
+  font-size:22px;
+  line-height:1.25;
+}
 
-    .pointer {
-      width:0;
-      height:0;
-      border-left:14px solid transparent;
-      border-right:14px solid transparent;
-      border-top:22px solid var(--gold);
-      filter:drop-shadow(0 8px 14px rgba(0,0,0,.35));
-      margin-bottom:-6px;
-      z-index:3;
-    }
+p{
+  margin:0 0 14px;
+  opacity:.92;
+  font-size:14px;
+}
 
-    canvas {
-      width:340px;
-      height:340px;
-      max-width:92vw;
-      max-height:92vw;
-    }
+/* ===== WHEEL ===== */
+.wheel-area{
+  display:grid;
+  place-items:center;
+  margin:12px 0 6px;
+  position:relative;
+}
 
-    .btnrow {
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:12px;
-    }
+.pointer{
+  width:0;height:0;
+  border-left:14px solid transparent;
+  border-right:14px solid transparent;
+  border-top:22px solid var(--gold);
+  filter:drop-shadow(0 8px 14px rgba(0,0,0,.35));
+  margin-bottom:-6px;
+  z-index:3;
+}
 
-    button {
-      flex:1;
-      min-width:140px;
-      padding:14px 16px;
-      border-radius:14px;
-      border:none;
-      font-weight:700;
-      cursor:pointer;
-    }
+canvas{
+  width:340px;
+  height:340px;
+  max-width:92vw;
+  max-height:92vw;
+}
 
-    #spinBtn {
-      background:linear-gradient(180deg,#f0d98a,#caa74a);
-      color:#2E004F;
-    }
+/* ===== BUTTONS ===== */
+.actions{
+  display:flex;
+  gap:10px;
+  margin-top:14px;
+}
 
-    #claimBtn {
-      background:#4a2a66;
-      color:#fff;
-      display:none;
-    }
+button{
+  flex:1;
+  border-radius:14px;
+  border:0;
+  padding:14px;
+  font-weight:700;
+  cursor:pointer;
+}
 
-    .footer {
-      margin-top:12px;
-      font-size:11px;
-      opacity:.7;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:8px;
-      flex-wrap:wrap;
-    }
+.spin{
+  background:linear-gradient(180deg,#F1D27A,#C9A24D);
+  color:#2E004F;
+}
 
-    .footer img {
-      height:20px;
-      vertical-align:middle;
-    }
-  </style>
+.claim{
+  background:rgba(255,255,255,.12);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.25);
+}
+
+/* ===== FOOTER ===== */
+.footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:10px;
+  font-size:12px;
+  opacity:.75;
+}
+</style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="card">
+<div class="wrap">
+  <div class="card">
 
-      <!-- HERO BANNER -->
+    <!-- HERO BANNER -->
+    <picture>
+      <source media="(max-width:480px)"
+        srcset="https://funbet.me/content/wp-content/uploads/2025/12/Spin-1080x480-1.jpg">
+      <source media="(max-width:1024px)"
+        srcset="https://funbet.me/content/wp-content/uploads/2025/12/Spin-1200x500-1.jpg">
       <img
         class="hero-banner"
-        src="https://funbet.me/content/wp-content/uploads/2025/12/Dragon88888-Master-Campaign-planner-1920x1080px-DD-19Nov2025-V9.jpg"
+        src="https://funbet.me/content/wp-content/uploads/2025/12/Spin-1920x600-1.jpg"
         alt="FunBet.Me Super Signup Lucky Spins"
-      />
+        loading="lazy">
+    </picture>
 
-      <div class="top">
-        <strong>FunBet.Me</strong>
-        <span class="pill">18+ • Terms apply</span>
-      </div>
-
-      <h1>Spin to unlock your bonus 🎁</h1>
-      <p>Tap spin, see your reward, then claim it on FunBet.Me.</p>
-
-      <div class="wheel-area">
-        <div class="pointer"></div>
-        <canvas id="wheel" width="340" height="340"></canvas>
-      </div>
-
-      <div class="btnrow">
-        <button id="spinBtn">SPIN</button>
-        <button id="claimBtn">CLAIM BONUS</button>
-      </div>
-
-      <div class="footer">
-        <span>Anjouan License No. ALSI-202508066-F12</span>
-        <span>
-          <img src="https://funbet.me/content/screenshot-2025-12-18-142025/" alt="18+ Verified">
-        </span>
-      </div>
-
+    <!-- HEADER -->
+    <div class="top">
+      <div class="logo">FunBet.Me</div>
+      <div class="pill">18+ • T&amp;Cs apply</div>
     </div>
+
+    <h1>Spin to unlock your bonus 🎁</h1>
+    <p>Tap spin, reveal your reward, then claim it instantly on FunBet.Me.</p>
+
+    <!-- WHEEL -->
+    <div class="wheel-area">
+      <div class="pointer"></div>
+      <canvas id="wheel" width="340" height="340"></canvas>
+    </div>
+
+    <!-- CTA -->
+    <div class="actions">
+      <button class="spin" onclick="spin()">SPIN</button>
+      <button class="claim" onclick="claim()">Claim Bonus</button>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <span>No deposit • Zero risk</span>
+      <span>Verified platform</span>
+    </div>
+
   </div>
+</div>
 
 <script>
-  const prizes = [
-    "€10 Bonus",
-    "€15 Bonus",
-    "€20 Bonus",
-    "25 Free Spins",
-    "€5 Bonus",
-    "Try Again"
-  ];
+const canvas = document.getElementById('wheel');
+const ctx = canvas.getContext('2d');
 
-  const canvas = document.getElementById("wheel");
-  const ctx = canvas.getContext("2d");
-  const spinBtn = document.getElementById("spinBtn");
-  const claimBtn = document.getElementById("claimBtn");
+const prizes = [
+  '€10 Bonus',
+  '€15 Bonus',
+  '€20 Bonus',
+  '25 Free Spins',
+  '€12 Bonus',
+  'Surprise Bonus'
+];
 
-  const size = canvas.width;
-  const center = size / 2;
-  const radius = center - 10;
-  const slice = (2 * Math.PI) / prizes.length;
+const colors = ['#5A2A82','#6D3599'];
+let angle = 0;
 
-  let angle = 0;
-  let spinning = false;
+function draw(){
+  const arc = Math.PI*2/prizes.length;
+  for(let i=0;i<prizes.length;i++){
+    ctx.beginPath();
+    ctx.fillStyle = colors[i%2];
+    ctx.moveTo(170,170);
+    ctx.arc(170,170,165,angle+i*arc,angle+(i+1)*arc);
+    ctx.fill();
 
-  function drawWheel() {
-    ctx.clearRect(0,0,size,size);
-    prizes.forEach((text,i) => {
-      const start = angle + i * slice;
-      ctx.beginPath();
-      ctx.moveTo(center,center);
-      ctx.arc(center,center,radius,start,start+slice);
-      ctx.fillStyle = i % 2 ? "#3b1a52" : "#4a2a66";
-      ctx.fill();
-      ctx.save();
-      ctx.translate(center,center);
-      ctx.rotate(start + slice/2);
-      ctx.fillStyle = "#fff";
-      ctx.font = "bold 14px system-ui";
-      ctx.textAlign = "right";
-      ctx.fillText(text, radius - 14, 6);
-      ctx.restore();
-    });
+    ctx.save();
+    ctx.translate(170,170);
+    ctx.rotate(angle+i*arc+arc/2);
+    ctx.textAlign='right';
+    ctx.fillStyle='#fff';
+    ctx.font='bold 14px system-ui';
+    ctx.fillText(prizes[i],150,5);
+    ctx.restore();
   }
+}
 
-  function spin() {
-    if (spinning) return;
-    spinning = true;
-    claimBtn.style.display = "none";
+draw();
 
-    let spins = Math.random()*10 + 10;
-    let velocity = spins;
-
-    const anim = setInterval(() => {
-      angle += velocity * 0.02;
-      velocity *= 0.97;
-      drawWheel();
-
-      if (velocity < 0.05) {
-        clearInterval(anim);
-        spinning = false;
-        claimBtn.style.display = "block";
-      }
-    }, 16);
+function spin(){
+  const spins = Math.random()*2000+2000;
+  const start = performance.now();
+  function anim(t){
+    const p = Math.min((t-start)/2000,1);
+    angle += (spins*(1-p))/5000;
+    ctx.clearRect(0,0,340,340);
+    draw();
+    if(p<1) requestAnimationFrame(anim);
   }
+  requestAnimationFrame(anim);
+}
 
-  spinBtn.onclick = spin;
-  drawWheel();
+function claim(){
+  window.location.href = 'https://funbet.me/en/promotions';
+}
 </script>
+
 </body>
 </html>
