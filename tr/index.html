@@ -2,10 +2,13 @@
 <html lang="tr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Çevir & Bonus Kazan | FunBet.Me</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Çevir ve Bonus Kazan | FunBet.Me</title>
 
-  <meta name="robots" content="noindex, nofollow" />
+  <meta name="robots" content="noindex,nofollow" />
+
+  <!-- Favicon (use FunBet logo) -->
+  <link rel="icon" type="image/png" href="https://funbet.me/content/wp-content/uploads/2025/12/FUNBET.ME_FINAL_01072025-01.jpg">
 
   <style>
     :root{
@@ -13,28 +16,43 @@
       --gold:#D6B35A;
       --card:rgba(255,255,255,.08);
       --text:#fff;
+      --muted:rgba(255,255,255,.85);
     }
 
     body{
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:radial-gradient(1200px 700px at 50% 20%, rgba(214,179,90,.25), transparent 60%), var(--bg);
+      background:
+        radial-gradient(1200px 700px at 50% 20%, rgba(214,179,90,.25), transparent 60%),
+        var(--bg);
       color:var(--text);
-      min-height:100vh;
       display:flex;
+      min-height:100vh;
       align-items:center;
       justify-content:center;
       padding:18px;
     }
 
-    .wrap{max-width:560px;width:100%}
-
+    .wrap{max-width:560px;width:100%;}
     .card{
       background:var(--card);
       border:1px solid rgba(255,255,255,.12);
       border-radius:20px;
       padding:18px;
       box-shadow:0 20px 60px rgba(0,0,0,.35);
+    }
+
+    /* Hero banner */
+    .hero{
+      width:100%;
+      border-radius:16px;
+      overflow:hidden;
+      margin-bottom:12px;
+    }
+    .hero img{
+      width:100%;
+      height:auto;
+      display:block;
     }
 
     .top{
@@ -44,34 +62,26 @@
       gap:10px;
       margin-bottom:10px;
     }
-
-    .logo img{height:28px}
-
+    .logo{font-weight:800;letter-spacing:.2px}
     .pill{
       font-size:12px;
       padding:6px 10px;
       border-radius:999px;
       border:1px solid rgba(214,179,90,.55);
       color:var(--gold);
-      background:rgba(214,179,90,.1);
+      background:rgba(214,179,90,.10);
+      white-space:nowrap;
     }
 
-    h1{
-      margin:8px 0 6px;
-      font-size:22px;
-      line-height:1.2;
-    }
+    h1{margin:8px 0 6px;font-size:22px;line-height:1.25;}
+    p{margin:0 0 14px;color:var(--muted)}
 
-    p{
-      margin:0 0 14px;
-      opacity:.92;
-    }
-
+    /* Wheel alignment (mobile-safe) */
     .wheel-area{
-      display:grid;
-      place-items:center;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
       margin:12px 0 6px;
-      position:relative;
     }
 
     .pointer{
@@ -79,100 +89,279 @@
       border-left:14px solid transparent;
       border-right:14px solid transparent;
       border-top:22px solid var(--gold);
+      filter:drop-shadow(0 8px 14px rgba(0,0,0,.35));
       margin-bottom:-6px;
       z-index:3;
-      filter:drop-shadow(0 8px 14px rgba(0,0,0,.35));
     }
 
     canvas{
-      width:340px;
-      height:340px;
-      max-width:92vw;
-      max-height:92vw;
+      display:block;
+      width:min(340px, 100%);
+      aspect-ratio:1 / 1;
+      height:auto;
+      max-width:100%;
     }
 
     .btnrow{
       display:flex;
       gap:10px;
+      flex-wrap:wrap;
       margin-top:12px;
     }
-
     button{
       flex:1;
+      padding:12px 14px;
       border-radius:14px;
-      border:none;
-      padding:14px;
-      font-weight:700;
+      border:0;
       cursor:pointer;
+      font-weight:800;
       font-size:15px;
     }
-
-    #spinBtn{
-      background:linear-gradient(135deg,#EAD58A,#C9A640);
-      color:#2E004F;
+    .spin{
+      background:linear-gradient(135deg,var(--gold),#f2d37a);
+      color:#2a1a00;
     }
-
-    #claimBtn{
+    .claim{
       background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
       color:#fff;
+    }
+    .claim[disabled]{opacity:.5;cursor:not-allowed;}
+
+    .result{
+      margin-top:10px;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.20);
       display:none;
     }
 
-    .footer{
+    .fine{
       margin-top:14px;
-      font-size:11px;
-      opacity:.7;
+      font-size:12px;
+      opacity:.75;
       text-align:center;
     }
 
-    .footer img{
-      height:26px;
-      margin:6px 4px 0;
-      vertical-align:middle;
+    .langbar{
+      display:flex;
+      gap:8px;
+      justify-content:flex-end;
+      margin-top:10px;
+      flex-wrap:wrap;
     }
+    .langbtn{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      cursor:pointer;
+    }
+
+    a{color:var(--gold);text-decoration:none;}
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="card">
+<div class="wrap">
+  <div class="card">
 
-      <div class="top">
-        <div class="logo">
-          <img src="https://funbet.me/content/wp-content/uploads/2025/12/FUNBET.ME_FINAL_01072025-01.jpg" alt="FunBet.Me">
-        </div>
-        <div class="pill">18+ • Şartlar geçerlidir</div>
-      </div>
-
-      <h1>Çevir ve bonusunu kazan 🎁</h1>
-      <p>Çarkı çevir, ödülünü gör ve FunBet.Me’de hemen al.</p>
-
-      <div class="wheel-area">
-        <div class="pointer"></div>
-        <canvas id="wheel" width="340" height="340"></canvas>
-      </div>
-
-      <div class="btnrow">
-        <button id="spinBtn">ÇEVİR</button>
-        <button id="claimBtn">BONUSU AL</button>
-      </div>
-
-      <div class="footer">
-        <div>
-          <img src="https://funbet.me/content/screenshot-2025-12-18-142025/" alt="18+">
-        </div>
-        Anjouan Lisansı No: ALSI-202508066-F12
-      </div>
-
+    <!-- Hero Banner (3 sizes) -->
+    <div class="hero">
+      <picture>
+        <source media="(min-width:1024px)" srcset="https://funbet.me/content/wp-content/uploads/2025/12/Spin-1920x600-1.jpg">
+        <source media="(min-width:600px)" srcset="https://funbet.me/content/wp-content/uploads/2025/12/Spin-1200x500-1.jpg">
+        <img src="https://funbet.me/content/wp-content/uploads/2025/12/Spin-1080x480-1.jpg" alt="FunBet.Me Lucky Spin Bonus">
+      </picture>
     </div>
+
+    <div class="top">
+      <div class="logo">FunBet.Me</div>
+      <div class="pill">18+ • Şartlar geçerlidir</div>
+    </div>
+
+    <h1>Bonusunu açmak için çevir 🎁</h1>
+    <p>Çevir, ödülünü gör, sonra FunBet.Me’de al.</p>
+
+    <div class="wheel-area">
+      <div class="pointer"></div>
+      <canvas id="wheel" width="620" height="620"></canvas>
+    </div>
+
+    <div class="btnrow">
+      <button class="spin" id="spinBtn">ÇEVİR</button>
+      <button class="claim" id="claimBtn" disabled>Bonusu Al</button>
+    </div>
+
+    <div class="result" id="resultBox"></div>
+
+    <div class="fine">
+      Bu bir promosyon ön sayfasıdır. Çevirme sonrası
+      <a id="promoLink" href="#">FunBet.Me Promosyonlar</a> sayfasına yönlendirileceksiniz.
+    </div>
+
+    <!-- Language / GEO switch (keeps query params) -->
+    <div class="langbar" aria-label="Language">
+      <button class="langbtn" data-lang="">EN</button>
+      <button class="langbtn" data-lang="tr/">TR</button>
+      <button class="langbtn" data-lang="in-en/">IN-EN</button>
+      <button class="langbtn" data-lang="in-hi/">IN-HI</button>
+    </div>
+
   </div>
+</div>
 
 <script>
-  const canvas = document.getElementById("wheel");
-  const ctx = canvas.getContext("2d");
+  /* ===== CONFIG: TURKEY / TR ===== */
+  const CLAIM_URL = "https://funbet.me/tr/promotions";
 
   const prizes = [
-    "₺500 Bonus",
+    "₺300 Bonus",
+    "₺500 Bonus 🎯",
+    "25 Free Spins",
     "₺750 Bonus",
-    "₺1000 Bonus",
-    "25 Free Spins
+    "Sürpriz Bonus",
+    "₺250 Bonus"
+  ];
+
+  // Keep ₺500 a bit rarer
+  const weights = [18, 12, 15, 17, 18, 20];
+  /* ================================ */
+
+  // Preserve tracking params into CLAIM_URL
+  const currentParams = new URLSearchParams(window.location.search);
+  const claimUrlObj = new URL(CLAIM_URL);
+  currentParams.forEach((v,k)=> claimUrlObj.searchParams.set(k,v));
+  document.getElementById("promoLink").href = claimUrlObj.toString();
+
+  // Footer language buttons (keeps params)
+  document.querySelectorAll(".langbtn").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const target = "/" + (btn.getAttribute("data-lang") || "");
+      window.location.href = target + (window.location.search || "");
+    });
+  });
+
+  const canvas = document.getElementById("wheel");
+  const ctx = canvas.getContext("2d");
+  const spinBtn = document.getElementById("spinBtn");
+  const claimBtn = document.getElementById("claimBtn");
+  const resultBox = document.getElementById("resultBox");
+
+  const W = canvas.width, H = canvas.height;
+  const cx = W/2, cy = H/2;
+  const rOuter = 300, rInner = 70;
+
+  let angle = 0;
+  let spinning = false;
+  let landedIndex = null;
+
+  function pickWeightedIndex(){
+    const sum = weights.reduce((a,b)=>a+b,0);
+    let x = Math.random()*sum;
+    for(let i=0;i<weights.length;i++){
+      x -= weights[i];
+      if(x<=0) return i;
+    }
+    return weights.length-1;
+  }
+
+  function drawWheel(){
+    ctx.clearRect(0,0,W,H);
+
+    const seg = (Math.PI * 2) / prizes.length;
+
+    for(let i=0;i<prizes.length;i++){
+      const start = angle + i*seg;
+      const end = start + seg;
+
+      ctx.beginPath();
+      ctx.moveTo(cx,cy);
+      ctx.arc(cx,cy,rOuter,start,end);
+      ctx.closePath();
+      ctx.fillStyle = (i % 2 === 0) ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.18)";
+      ctx.fill();
+
+      ctx.strokeStyle = "rgba(214,179,90,0.28)";
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      ctx.save();
+      ctx.translate(cx,cy);
+      ctx.rotate(start + seg/2);
+      ctx.textAlign = "right";
+      ctx.fillStyle = "#fff";
+      ctx.font = "700 22px system-ui, -apple-system, Segoe UI, Roboto, Arial";
+      ctx.fillText(prizes[i], rOuter - 18, 8);
+      ctx.restore();
+    }
+
+    ctx.beginPath();
+    ctx.arc(cx,cy,rInner,0,Math.PI*2);
+    ctx.fillStyle = "rgba(0,0,0,0.30)";
+    ctx.fill();
+    ctx.strokeStyle = "rgba(214,179,90,0.55)";
+    ctx.lineWidth = 4;
+    ctx.stroke();
+
+    ctx.fillStyle = "rgba(214,179,90,0.95)";
+    ctx.font = "800 22px system-ui, -apple-system, Segoe UI, Roboto, Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("SPIN", cx, cy+8);
+  }
+
+  function easeOutCubic(t){ return 1 - Math.pow(1-t, 3); }
+
+  function spinToIndex(targetIndex){
+    const seg = (Math.PI*2)/prizes.length;
+    const pointerAngle = -Math.PI/2; // top
+    const targetCenter = pointerAngle - (targetIndex*seg + seg/2);
+    const extraTurns = 6;
+    const target = targetCenter + extraTurns * Math.PI*2;
+
+    const startAngle = angle;
+    const delta = target - startAngle;
+
+    const duration = 4200;
+    const start = performance.now();
+
+    spinning = true;
+    claimBtn.disabled = true;
+    resultBox.style.display = "none";
+    landedIndex = null;
+
+    function frame(now){
+      const t = Math.min(1, (now - start)/duration);
+      angle = startAngle + delta * easeOutCubic(t);
+      drawWheel();
+      if (t < 1) requestAnimationFrame(frame);
+      else{
+        spinning = false;
+        landedIndex = targetIndex;
+        const prize = prizes[targetIndex];
+        resultBox.innerHTML = `✅ <b>Açıldı:</b> ${prize}<br/>Devam etmek için <b>Bonusu Al</b> tıklayın.`;
+        resultBox.style.display = "block";
+        claimBtn.disabled = false;
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  spinBtn.addEventListener("click", ()=>{
+    if(spinning) return;
+    spinToIndex(pickWeightedIndex());
+  });
+
+  claimBtn.addEventListener("click", ()=>{
+    if(claimBtn.disabled) return;
+    if(landedIndex !== null) claimUrlObj.searchParams.set("wheel_prize", prizes[landedIndex]);
+    window.location.href = claimUrlObj.toString();
+  });
+
+  drawWheel();
+</script>
+</body>
+</html>
