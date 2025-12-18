@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="hi">
+<html lang="tr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>स्पिन करें और बोनस पाएँ | FunBet.Me</title>
+  <title>Çevir ve Bonus Kazan | FunBet.Me</title>
 
   <meta name="robots" content="noindex,nofollow" />
 
@@ -177,11 +177,11 @@
     <div class="brand">
       <img src="https://funbet.me/content/wp-content/uploads/2025/12/FUNBET.ME_FINAL_01072025-01.jpg" alt="FunBet.Me">
     </div>
-    <div class="pill">18+ • नियम लागू</div>
+    <div class="pill">18+ • Şartlar geçerlidir</div>
   </div>
 
-  <h1>अपने बोनस के लिए स्पिन करें 🎁</h1>
-  <p>स्पिन करें, इनाम देखें और FunBet.Me पर क्लेम करें।</p>
+  <h1>Bonusunu açmak için çevir 🎁</h1>
+  <p>Çevir, ödülünü gör ve FunBet.Me’de kullan.</p>
 
   <div class="wheel-area">
     <div class="pointer"></div>
@@ -189,15 +189,15 @@
   </div>
 
   <div class="btnrow">
-    <button class="spin" id="spinBtn">SPIN</button>
-    <button class="claim" id="claimBtn" disabled>बोनस क्लेम करें</button>
+    <button class="spin" id="spinBtn">ÇEVİR</button>
+    <button class="claim" id="claimBtn" disabled>Bonusu Al</button>
   </div>
 
   <div class="result" id="resultBox"></div>
 
   <div class="fine">
-    यह एक प्रमोशनल पेज है।
-    <a id="promoLink" href="#">प्रमोशन्स पर जाएँ</a>
+    Bu bir promosyon sayfasıdır.
+    <a id="promoLink" href="#">Promosyonlara Git</a>
   </div>
 
   <div class="langbar">
@@ -213,22 +213,24 @@
 </div>
 
 <script>
-  // ========= CONFIG (IN-HI / INR) =========
-  const CLAIM_URL = "https://funbet.me/hi/promotions";
+  // ========= CONFIG (TR / TRY) =========
+  const CLAIM_URL = "https://funbet.me/tr/promotions";
   const BASE_PATH = "/SpinTheWheel";
 
   const prizes = [
-    "₹500 बोनस",
-    "₹750 बोनस",
-    "₹1,000 बोनस",
-    "25 फ्री स्पिन",
-    "सरप्राइज़ बोनस",
-    "₹600 बोनस"
+    "₺300 Bonus",
+    "₺500 Bonus",
+    "₺1.000 Bonus",
+    "25 Free Spins",
+    "Sürpriz Bonus",
+    "₺600 Bonus"
   ];
 
-  const prizeValues = [500, 750, 1000, 0, -1, 600];
+  const prizeValues = [300, 500, 1000, 0, -1, 600];
+
+  // ₺1.000 slightly rarer
   const weights = [18, 18, 12, 17, 17, 18];
-  // =======================================
+  // ====================================
 
   const params = new URLSearchParams(location.search);
   const claimUrl = new URL(CLAIM_URL);
@@ -286,7 +288,7 @@
       if(p<1)requestAnimationFrame(anim);
       else{
         spinning=false;
-        resultBox.innerHTML=`✅ <b>अनलॉक हुआ:</b> ${prizes[win]}`;
+        resultBox.innerHTML=`✅ <b>Açıldı:</b> ${prizes[win]}`;
         resultBox.style.display="block";
         claimBtn.disabled=false;
       }
