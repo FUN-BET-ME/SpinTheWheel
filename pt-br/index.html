@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Gire e Ganhe Bônus | FunBet.Me</title>
+  <title>Gire e ganhe bônus | FunBet.Me</title>
 
   <meta name="robots" content="noindex,nofollow" />
 
@@ -59,16 +59,13 @@
       background:rgba(0,0,0,.15);
     }
     .hero-img{width:100%;height:auto;display:block;object-fit:cover;}
-    @media (min-width:1024px){ .hero-img{ max-height:260px; } }
-    @media (max-width:1023px) and (min-width:600px){ .hero-img{ max-height:220px; } }
-    @media (max-width:599px){ .hero-img{ max-height:160px; } }
 
     .top{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:10px;
       margin-bottom:10px;
+      gap:10px;
     }
     .brand img{height:28px;}
 
@@ -86,6 +83,7 @@
     p{margin:0 0 14px;color:var(--muted);}
 
     .wheel-area{
+      position:relative;
       display:flex;
       flex-direction:column;
       align-items:center;
@@ -108,7 +106,7 @@
       height:auto;
     }
 
-    .btnrow{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;}
+    .btnrow{display:flex;gap:10px;margin-top:12px;}
     button{
       flex:1;
       padding:12px;
@@ -118,7 +116,7 @@
       font-weight:800;
       font-size:15px;
     }
-    .spin{background:linear-gradient(135deg,var(--gold),#f2d37a);color:#2a1a00;}
+    .spin{background:linear-gradient(135deg,var(--gold),#f2d37a);}
     .claim{
       background:rgba(255,255,255,.12);
       color:#fff;
@@ -181,7 +179,7 @@
   </div>
 
   <h1>Gire para desbloquear seu bônus 🎁</h1>
-  <p>Gire a roleta, veja seu prêmio e ative no FunBet.Me.</p>
+  <p>Toque em girar, veja sua recompensa e ative no FunBet.Me.</p>
 
   <div class="wheel-area">
     <div class="pointer"></div>
@@ -190,14 +188,14 @@
 
   <div class="btnrow">
     <button class="spin" id="spinBtn">GIRAR</button>
-    <button class="claim" id="claimBtn" disabled>Resgatar Bônus</button>
+    <button class="claim" id="claimBtn" disabled>Resgatar bônus</button>
   </div>
 
   <div class="result" id="resultBox"></div>
 
   <div class="fine">
-    Esta é uma página promocional.
-    <a id="promoLink" href="#">Ir para Promoções</a>
+    Promotional pre-landing page. You’ll be redirected to
+    <a id="promoLink" href="#" rel="noopener">FunBet.Me Promotions</a>.
   </div>
 
   <div class="langbar">
@@ -213,22 +211,25 @@
 </div>
 
 <script>
-  // ========= CONFIG (PT-BR / BRL) =========
+  // ===== CONFIG (PT-BR / BRL) =====
   const CLAIM_URL = "https://funbet.me/pt-br/promotions";
   const BASE_PATH = "/SpinTheWheel";
 
   const prizes = [
-    "R$50 Bônus",
-    "R$75 Bônus",
-    "R$100 Bônus",
+    "R$ 20 Bônus",
+    "R$ 30 Bônus",
+    "R$ 40 Bônus 🎯",
     "25 Rodadas Grátis",
     "Bônus Surpresa",
-    "R$60 Bônus"
+    "R$ 25 Bônus"
   ];
 
-  const prizeValues = [50, 75, 100, 0, -1, 60];
+  // Values we pass to FunBet (clean URL, future-proof)
+  const prizeValues = [20, 30, 40, 0, -1, 25];
+
+  // Keep R$40 a bit rarer
   const weights = [18, 18, 12, 17, 17, 18];
-  // ======================================
+  // ===============================
 
   const params = new URLSearchParams(location.search);
   const claimUrl = new URL(CLAIM_URL);
@@ -236,32 +237,37 @@
   document.getElementById("promoLink").href = claimUrl.toString();
 
   document.querySelectorAll(".langbtn").forEach(b=>{
-    b.onclick=()=>{
-      const l=(b.dataset.lang||"").trim();
-      const t=l===""?`${BASE_PATH}/`:`${BASE_PATH}/${l}/`;
-      location.href=t+(location.search||"");
-    };
+    b.onclick=()=>location.href=
+      `${BASE_PATH}/${b.dataset.lang||""}${location.search}`;
   });
 
-  const c=wheel,ctx=c.getContext("2d");
-  const cx=310,cy=310,r=300;
-  let angle=0,spinning=false,win=null;
+  const c = document.getElementById("wheel");
+  const ctx = c.getContext("2d");
+  const cx = 310, cy = 310, r = 300;
+
+  let angle = 0, spinning = false, win = null;
+
+  const spinBtn = document.getElementById("spinBtn");
+  const claimBtn = document.getElementById("claimBtn");
+  const resultBox = document.getElementById("resultBox");
 
   function pick(){
-    let s=weights.reduce((a,b)=>a+b),x=Math.random()*s;
-    for(let i=0;i<weights.length;i++){if((x-=weights[i])<=0)return i}
+    let s = weights.reduce((a,b)=>a+b,0), x = Math.random()*s;
+    for(let i=0;i<weights.length;i++){ if((x-=weights[i])<=0) return i; }
     return 0;
   }
 
   function draw(){
     ctx.clearRect(0,0,620,620);
-    const seg=2*Math.PI/prizes.length;
+    const seg = 2*Math.PI/prizes.length;
+
     prizes.forEach((t,i)=>{
       ctx.beginPath();
       ctx.moveTo(cx,cy);
       ctx.arc(cx,cy,r,angle+i*seg,angle+(i+1)*seg);
-      ctx.fillStyle=i%2?"rgba(0,0,0,.20)":"rgba(255,255,255,.10)";
+      ctx.fillStyle = i%2 ? "rgba(0,0,0,.20)" : "rgba(255,255,255,.10)";
       ctx.fill();
+
       ctx.save();
       ctx.translate(cx,cy);
       ctx.rotate(angle+i*seg+seg/2);
@@ -271,31 +277,50 @@
       ctx.fillText(t,r-20,8);
       ctx.restore();
     });
+
+    // Center "SPIN" circle (restored)
+    ctx.beginPath();
+    ctx.arc(cx,cy,70,0,Math.PI*2);
+    ctx.strokeStyle="rgba(214,179,90,.9)";
+    ctx.lineWidth=6;
+    ctx.stroke();
+
+    ctx.fillStyle="rgba(214,179,90,.95)";
+    ctx.font="900 24px Arial";
+    ctx.textAlign="center";
+    ctx.textBaseline="middle";
+    ctx.fillText("SPIN",cx,cy);
   }
 
   spinBtn.onclick=()=>{
-    if(spinning)return;
-    win=pick();spinning=true;claimBtn.disabled=true;
-    const seg=2*Math.PI/prizes.length;
-    const target=-Math.PI/2-(win*seg)+6*2*Math.PI;
-    const start=angle,delta=target-start,t0=performance.now();
+    if(spinning) return;
+    win = pick();
+    spinning = true;
+    claimBtn.disabled = true;
+    resultBox.style.display = "none";
+
+    const seg = 2*Math.PI/prizes.length;
+    const target = -Math.PI/2 - (win*seg) + 6*2*Math.PI;
+    const start = angle, delta = target - start, t0 = performance.now();
+
     (function anim(t){
-      const p=Math.min(1,(t-t0)/4200);
-      angle=start+delta*(1-Math.pow(1-p,3));
+      const p = Math.min(1,(t-t0)/4200);
+      angle = start + delta*(1-Math.pow(1-p,3));
       draw();
-      if(p<1)requestAnimationFrame(anim);
+      if(p<1) requestAnimationFrame(anim);
       else{
-        spinning=false;
-        resultBox.innerHTML=`✅ <b>Desbloqueado:</b> ${prizes[win]}`;
-        resultBox.style.display="block";
-        claimBtn.disabled=false;
+        spinning = false;
+        resultBox.innerHTML = `✅ <b>Desbloqueado:</b> ${prizes[win]}<br/>Agora toque em <b>Resgatar bônus</b>.`;
+        resultBox.style.display = "block";
+        claimBtn.disabled = false;
       }
     })(t0);
   };
 
   claimBtn.onclick=()=>{
-    claimUrl.searchParams.set("bonus_value",String(prizeValues[win]));
-    location.href=claimUrl;
+    if(win === null) return;
+    claimUrl.searchParams.set("bonus_value", String(prizeValues[win]));
+    location.href = claimUrl.toString();
   };
 
   draw();
