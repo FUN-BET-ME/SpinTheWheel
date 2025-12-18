@@ -1,22 +1,18 @@
 <!doctype html>
 <html lang="en-IN">
 <head>
-  <!-- Favicon -->
-<link rel="icon" href="https://funbet.me/favicon.ico" type="image/x-icon">
-
-<!-- PNG fallback -->
-<link rel="icon" type="image/png" sizes="32x32"
-      href="https://funbet.me/content/wp-content/uploads/2025/12/favicon-32.png">
-
-<!-- Apple / iOS -->
-<link rel="apple-touch-icon" sizes="180x180"
-      href="https://funbet.me/content/wp-content/uploads/2025/12/favicon-180.png">
-
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Spin & Unlock Bonus | FunBet.Me (India)</title>
 
   <meta name="robots" content="noindex,nofollow" />
+
+  <!-- Favicons -->
+  <link rel="icon" href="https://funbet.me/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="https://funbet.me/content/wp-content/uploads/2025/12/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="https://funbet.me/content/wp-content/uploads/2025/12/favicon-180.png">
 
   <style>
     :root{
@@ -28,6 +24,7 @@
       --stroke:rgba(255,255,255,.12);
     }
     *{box-sizing:border-box}
+
     body{
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
@@ -42,6 +39,7 @@
       justify-content:center;
       padding:18px;
     }
+
     .wrap{max-width:580px;width:100%;}
     .card{
       background:var(--card);
@@ -52,7 +50,6 @@
       backdrop-filter: blur(6px);
     }
 
-    /* ===== Hero banner (responsive) ===== */
     .hero{
       width:100%;
       overflow:hidden;
@@ -61,17 +58,10 @@
       border:1px solid rgba(255,255,255,.10);
       background:rgba(0,0,0,.15);
     }
-    .hero-img{width:100%;height:auto;display:block;}
-    @media (min-width: 1024px){
-      .hero{ box-shadow: 0 18px 50px rgba(0,0,0,.33); }
-      .hero-img{ max-height: 260px; object-fit: cover; }
-    }
-    @media (max-width: 1023px) and (min-width: 600px){
-      .hero-img{ max-height: 220px; object-fit: cover; }
-    }
-    @media (max-width: 599px){
-      .hero-img{ max-height: 160px; object-fit: cover; }
-    }
+    .hero-img{width:100%;height:auto;display:block;object-fit:cover;}
+    @media (min-width:1024px){ .hero-img{ max-height:260px; } }
+    @media (max-width:1023px) and (min-width:600px){ .hero-img{ max-height:220px; } }
+    @media (max-width:599px){ .hero-img{ max-height:160px; } }
 
     .top{
       display:flex;
@@ -96,36 +86,34 @@
     h1{margin:8px 0 6px;font-size:22px;line-height:1.2;}
     p{margin:0 0 14px;color:var(--muted);}
 
-.wheel-area{
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  margin:12px 0 6px;
-}
+    .wheel-area{
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      margin:12px 0 6px;
+    }
 
-.pointer{
-  position:relative;       /* IMPORTANT for z-index */
-  z-index:10;              /* sits above canvas */
-  width:0;height:0;
-  border-left:14px solid transparent;
-  border-right:14px solid transparent;
-  border-top:22px solid var(--gold);
-  filter:drop-shadow(0 8px 14px rgba(0,0,0,.35));
-  margin-bottom:-6px;
-}
+    .pointer{
+      position:relative;
+      z-index:10;
+      width:0;height:0;
+      border-left:14px solid transparent;
+      border-right:14px solid transparent;
+      border-top:22px solid var(--gold);
+      filter:drop-shadow(0 8px 14px rgba(0,0,0,.35));
+      margin-bottom:-6px;
+    }
 
-
-canvas{
-  display:block;
-  width:min(340px, 100%);
-  aspect-ratio:1 / 1;
-  height:auto;
-  max-width:100%;
-}
-
-    canvas{width:340px;height:340px;max-width:92vw;max-height:92vw;}
+    /* single clean canvas rule (no duplicates) */
+    canvas{
+      display:block;
+      width:min(340px,92vw);
+      aspect-ratio:1/1;
+      height:auto;
+      max-width:100%;
+    }
 
     .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
     button{
@@ -165,7 +153,7 @@ canvas{
       gap:8px;
       justify-content:flex-end;
       margin-top:10px;
-      flex-wrap:wrap
+      flex-wrap:wrap;
     }
     .langbtn{
       font-size:12px;
@@ -174,7 +162,7 @@ canvas{
       border:1px solid rgba(255,255,255,.18);
       background:rgba(255,255,255,.08);
       color:#fff;
-      cursor:pointer
+      cursor:pointer;
     }
 
     .footer-badges{
@@ -207,7 +195,6 @@ canvas{
   <div class="wrap">
     <div class="card">
 
-      <!-- Hero banner -->
       <div class="hero">
         <img
           class="hero-img"
@@ -234,211 +221,3 @@ canvas{
 
       <h1>Spin to unlock your bonus 🎁</h1>
       <p>Tap spin, see your reward, then claim it on FunBet.Me.</p>
-
-      <div class="wheel-area">
-        <div class="pointer"></div>
-        <canvas id="wheel" width="620" height="620"></canvas>
-      </div>
-
-      <div class="btnrow">
-        <button class="spin" id="spinBtn">SPIN</button>
-        <button class="claim" id="claimBtn" disabled>Claim Bonus</button>
-      </div>
-
-      <div class="result" id="resultBox"></div>
-
-      <div class="fine">
-        Promotional pre-landing page. After spinning, you’ll be redirected to
-        <a id="promoLink" href="#" rel="noopener">FunBet.Me Promotions</a>.
-      </div>
-
-      <div class="langbar" aria-label="Language">
-        <button class="langbtn" data-lang="en">EN</button>
-        <button class="langbtn" data-lang="tr">TR</button>
-        <button class="langbtn" data-lang="in-en">IN-EN</button>
-        <button class="langbtn" data-lang="in-hi">IN-HI</button>
-      </div>
-
-      <div class="footer-badges">
-        <img
-          src="https://funbet.me/content/screenshot-2025-12-18-142025/"
-          alt="18+ and Verified"
-        />
-      </div>
-
-      <div class="license">
-        Anjouan, License No. ALSI-202508066-F12
-      </div>
-    </div>
-  </div>
-
-<script>
-  // ========= CONFIG (India EN / INR) =========
-  const CLAIM_URL = "https://funbet.me/en/promotions";
-
-  // INR prizes (edit these anytime)
-  const prizes = [
-    "₹500 Bonus",
-    "₹750 Bonus",
-    "₹1,000 Bonus 🎯",
-    "25 Free Spins",
-    "Surprise Bonus",
-    "₹600 Bonus"
-  ];
-
-  // Keep ₹1,000 slightly rarer
-  const weights = [18, 18, 12, 17, 17, 18];
-  // ==========================================
-
-  // Preserve tracking params into CLAIM_URL
-  const currentParams = new URLSearchParams(window.location.search);
-  const claimUrlObj = new URL(CLAIM_URL);
-  currentParams.forEach((v,k)=> claimUrlObj.searchParams.set(k,v));
-  document.getElementById("promoLink").href = claimUrlObj.toString();
-
-  // Language buttons: switch within repo (keeps params)
-  function getRepoBasePath(){
-    const p = window.location.pathname;
-    const parts = p.split("/").filter(Boolean); // e.g. ["SpinTheWheel","in-en"]
-    if (parts.length === 0) return "/";
-    return "/" + parts[0] + "/"; // repo base
-  }
-
-  document.querySelectorAll(".langbtn").forEach(btn=>{
-    btn.addEventListener("click", ()=>{
-      const l = btn.getAttribute("data-lang");
-      const base = getRepoBasePath();
-      const target = (l === "en") ? base : (base + l + "/");
-      window.location.href = target + (window.location.search || "");
-    });
-  });
-
-  const canvas = document.getElementById("wheel");
-  const ctx = canvas.getContext("2d");
-  const spinBtn = document.getElementById("spinBtn");
-  const claimBtn = document.getElementById("claimBtn");
-  const resultBox = document.getElementById("resultBox");
-
-  const W = canvas.width, H = canvas.height;
-  const cx = W/2, cy = H/2;
-  const rOuter = 300, rInner = 70;
-
-  let angle = 0;
-  let spinning = false;
-  let landedIndex = null;
-
-  function pickWeightedIndex() {
-    const sum = weights.reduce((a,b)=>a+b,0);
-    let x = Math.random()*sum;
-    for (let i=0;i<weights.length;i++){
-      x -= weights[i];
-      if (x <= 0) return i;
-    }
-    return weights.length-1;
-  }
-
-  function drawWheel() {
-    ctx.clearRect(0,0,W,H);
-
-    // outer glow ring
-    ctx.beginPath();
-    ctx.arc(cx,cy,rOuter+10,0,Math.PI*2);
-    ctx.fillStyle = "rgba(214,179,90,0.10)";
-    ctx.fill();
-
-    const seg = (Math.PI * 2) / prizes.length;
-
-    for (let i=0;i<prizes.length;i++){
-      const start = angle + i*seg;
-      const end = start + seg;
-
-      ctx.beginPath();
-      ctx.moveTo(cx,cy);
-      ctx.arc(cx,cy,rOuter,start,end);
-      ctx.closePath();
-      ctx.fillStyle = (i % 2 === 0) ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.18)";
-      ctx.fill();
-
-      ctx.strokeStyle = "rgba(214,179,90,0.28)";
-      ctx.lineWidth = 3;
-      ctx.stroke();
-
-      ctx.save();
-      ctx.translate(cx,cy);
-      ctx.rotate(start + seg/2);
-      ctx.textAlign = "right";
-      ctx.fillStyle = "#fff";
-      ctx.font = "700 22px system-ui, -apple-system, Segoe UI, Roboto, Arial";
-      ctx.fillText(prizes[i], rOuter - 18, 8);
-      ctx.restore();
-    }
-
-    // center hub
-    ctx.beginPath();
-    ctx.arc(cx,cy,rInner,0,Math.PI*2);
-    ctx.fillStyle = "rgba(0,0,0,0.30)";
-    ctx.fill();
-    ctx.strokeStyle = "rgba(214,179,90,0.55)";
-    ctx.lineWidth = 4;
-    ctx.stroke();
-
-    ctx.fillStyle = "rgba(214,179,90,0.95)";
-    ctx.font = "800 22px system-ui, -apple-system, Segoe UI, Roboto, Arial";
-    ctx.textAlign = "center";
-    ctx.fillText("SPIN", cx, cy+8);
-  }
-
-  function easeOutCubic(t){ return 1 - Math.pow(1-t, 3); }
-
-  function spinToIndex(targetIndex){
-    const seg = (Math.PI*2)/prizes.length;
-    const pointerAngle = -Math.PI/2; // top
-    const targetCenter = pointerAngle - (targetIndex*seg + seg/2);
-    const extraTurns = 6;
-    const target = targetCenter + extraTurns * Math.PI*2;
-
-    const startAngle = angle;
-    const delta = target - startAngle;
-
-    const duration = 4200;
-    const start = performance.now();
-
-    spinning = true;
-    claimBtn.disabled = true;
-    resultBox.style.display = "none";
-    landedIndex = null;
-
-    function frame(now){
-      const t = Math.min(1, (now - start)/duration);
-      angle = startAngle + delta * easeOutCubic(t);
-      drawWheel();
-      if (t < 1) requestAnimationFrame(frame);
-      else {
-        spinning = false;
-        landedIndex = targetIndex;
-        const prize = prizes[targetIndex];
-
-        resultBox.innerHTML =
-          `✅ <b>Unlocked:</b> ${prize}<br/>Now tap <b>Claim Bonus</b> to activate it on FunBet.Me.`;
-        resultBox.style.display = "block";
-        claimBtn.disabled = false;
-      }
-    }
-    requestAnimationFrame(frame);
-  }
-
-  spinBtn.addEventListener("click", () => {
-    if (spinning) return;
-    spinToIndex(pickWeightedIndex());
-  });
-
-  claimBtn.addEventListener("click", () => {
-    if (claimBtn.disabled) return;
-    if (landedIndex !== null) claimUrlObj.searchParams.set("wheel_prize", prizes[landedIndex]);
-    window.location.href = claimUrlObj.toString();
-  });
-
-  drawWheel();
-</script>
-</body>
-</html>
