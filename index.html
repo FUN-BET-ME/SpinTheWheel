@@ -1,292 +1,19 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Spin & Unlock Bonus | FunBet.Me</title>
-  <meta name="robots" content="noindex,nofollow" />
-
-  <link rel="icon" href="https://funbet.me/favicon.ico" type="image/x-icon">
-  <link rel="icon" type="image/png" sizes="32x32"
-        href="https://funbet.me/content/wp-content/uploads/2025/12/favicon-32.png">
-  <link rel="apple-touch-icon" sizes="180x180"
-        href="https://funbet.me/content/wp-content/uploads/2025/12/favicon-180.png">
-
-  <style>
-    :root{
-      --bg:#2E004F;
-      --gold:#D6B35A;
-      --card:rgba(255,255,255,.08);
-      --text:#fff;
-      --muted:rgba(255,255,255,.78);
-      --stroke:rgba(255,255,255,.12);
-      --soft:rgba(214,179,90,.12);
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:
-        radial-gradient(1200px 700px at 50% 18%, rgba(214,179,90,.22), transparent 60%),
-        radial-gradient(900px 500px at 20% 80%, rgba(214,179,90,.10), transparent 60%),
-        var(--bg);
-      color:var(--text);
-      display:flex;
-      min-height:100vh;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-    }
-
-    .wrap{max-width:580px;width:100%;}
-    .card{
-      background:var(--card);
-      border:1px solid var(--stroke);
-      border-radius:22px;
-      padding:18px;
-      box-shadow:0 20px 60px rgba(0,0,0,.35);
-      backdrop-filter: blur(6px);
-    }
-
-    .hero{
-      width:100%;
-      overflow:hidden;
-      border-radius:16px;
-      margin:6px 0 14px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(0,0,0,.15);
-    }
-    .hero-img{width:100%;height:auto;display:block;object-fit:cover;}
-    @media (min-width:1024px){ .hero-img{ max-height:260px; } }
-    @media (max-width:1023px) and (min-width:600px){ .hero-img{ max-height:220px; } }
-    @media (max-width:599px){ .hero-img{ max-height:160px; } }
-
-    .top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:10px;
-    }
-    .brand{display:flex;align-items:center;gap:10px;min-width:0;}
-    .brand img{
-      height:34px;
-      width:auto;
-      display:block;
-      object-fit:contain;
-      border-radius:6px;
-    }
-
-    .pill{
-      font-size:12px;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid rgba(214,179,90,.55);
-      color:var(--gold);
-      background:rgba(214,179,90,.10);
-      white-space:nowrap;
-    }
-
-    h1{margin:8px 0 8px;font-size:22px;line-height:1.2;}
-    p{margin:0 0 14px;color:var(--muted);}
-
-    .subinfo{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin:0 0 16px;
-    }
-    .tag{
-      padding:8px 12px;
-      border-radius:999px;
-      background:var(--soft);
-      border:1px solid rgba(214,179,90,.28);
-      color:#f5df9e;
-      font-size:13px;
-      font-weight:700;
-    }
-
-    .wheel-area{
-      position:relative;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      margin:12px 0 6px;
-    }
-
-    .pointer{
-      position:relative;
-      z-index:10;
-      width:0;height:0;
-      border-left:14px solid transparent;
-      border-right:14px solid transparent;
-      border-top:22px solid var(--gold);
-      margin-bottom:-6px;
-      filter:drop-shadow(0 8px 14px rgba(0,0,0,.35));
-    }
-
-    canvas{
-      display:block;
-      width:min(340px,92vw);
-      aspect-ratio:1/1;
-      height:auto;
-      max-width:100%;
-    }
-
-    .btnrow{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:12px;
-    }
-    button, .tg-btn{
-      flex:1;
-      padding:12px 14px;
-      border-radius:14px;
-      border:0;
-      cursor:pointer;
-      font-weight:800;
-      font-size:15px;
-      text-align:center;
-      text-decoration:none;
-      min-width:140px;
-    }
-    .spin{
-      background:linear-gradient(135deg,var(--gold),#f2d37a);
-      color:#2a1a00;
-    }
-    .claim{
-      background:rgba(255,255,255,.12);
-      color:#fff;
-      border:1px solid rgba(255,255,255,.18);
-    }
-    .claim[disabled]{opacity:.5;cursor:not-allowed;}
-    .tg-btn{
-      background:#229ED9;
-      color:#fff;
-      border:1px solid rgba(255,255,255,.15);
-    }
-
-    .result{
-      margin-top:10px;
-      padding:12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(0,0,0,.20);
-      display:none;
-      line-height:1.35;
-    }
-
-    .fine{
-      margin-top:14px;
-      font-size:12px;
-      opacity:.78;
-      text-align:center;
-      line-height:1.45;
-    }
-    a{color:var(--gold);text-decoration:none;}
-
-    .langbar{
-      display:flex;
-      gap:8px;
-      justify-content:flex-end;
-      margin-top:10px;
-      flex-wrap:wrap;
-    }
-    .langbtn{
-      font-size:12px;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.18);
-      background:rgba(255,255,255,.08);
-      color:#fff;
-      cursor:pointer;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="wrap">
-    <div class="card">
-
-      <div class="hero">
-        <img
-          class="hero-img"
-          src="https://funbet.me/content/wp-content/uploads/2026/03/Web-mar1-w2.png"
-          alt="FunBet.Me Lucky Spin"
-        />
-      </div>
-
-      <div class="top">
-        <div class="brand">
-          <img
-            src="https://funbet.me/content/wp-content/uploads/2025/12/FUNBET.ME_FINAL_01072025-01.jpg"
-            alt="FunBet.Me"
-          />
-        </div>
-        <div class="pill">18+ • Terms apply</div>
-      </div>
-
-      <h1>Spin to unlock your 250% bonus + 100 Free Spins + up to 10% Cashback 🎁</h1>
-      <p>Tap spin, reveal your reward, then claim it on FunBet.Me.</p>
-
-      <div class="subinfo">
-        <div class="tag">₺ Rewards Included</div>
-        <div class="tag">Papara Available</div>
-        <div class="tag">Bank Transfer Available</div>
-        <div class="tag">Join Telegram for More Offers</div>
-      </div>
-
-      <div class="wheel-area">
-        <div class="pointer"></div>
-        <canvas id="wheel" width="620" height="620"></canvas>
-      </div>
-
-      <div class="btnrow">
-        <button class="spin" id="spinBtn">SPIN</button>
-        <button class="claim" id="claimBtn" disabled>Claim Bonus</button>
-        <a class="tg-btn" id="telegramBtn" href="https://t.me/FunBetDotMe" target="_blank" rel="noopener">Join Telegram</a>
-      </div>
-
-      <div class="result" id="resultBox"></div>
-
-      <div class="fine">
-        Promotional pre-landing page. You’ll be redirected to
-        <a id="promoLink" href="#" rel="noopener">FunBet.Me Promotions</a>.
-        <br>
-        Local payment methods may include Papara and Bank Transfer depending on region.
-      </div>
-
-      <div class="langbar" aria-label="Language">
-        <button class="langbtn" data-lang="">EN</button>
-        <button class="langbtn" data-lang="tr">TR</button>
-        <button class="langbtn" data-lang="in-en">IN-EN</button>
-        <button class="langbtn" data-lang="in-hi">IN-HI</button>
-        <button class="langbtn" data-lang="ru">RU</button>
-        <button class="langbtn" data-lang="pt-br">PT-BR</button>
-      </div>
-
-    </div>
-  </div>
-
 <script>
   const CLAIM_URL = "https://funbet.me/en/promotions";
   const TELEGRAM_URL = "https://t.me/FunBetDotMe";
   const BASE_PATH = "/SpinTheWheel";
 
   const prizes = [
-    "₺500 Bonus",
+    "€10 Bonus",
     "25 Free Spins",
-    "₺750 Bonus 🎯",
-    "€12 Bonus",
+    "€15 Bonus",
     "Surprise Bonus",
-    "₺1000 Bonus"
+    "€20 Bonus 🎯",
+    "€12 Bonus"
   ];
 
-  const prizeValues = [500, 0, 750, 12, -1, 1000];
-
-  const weights = [18, 17, 13, 18, 16, 18];
+  const prizeValues = [10, 0, 15, -1, 20, 12];
+  const weights = [18, 17, 18, 16, 13, 18];
 
   const currentParams = new URLSearchParams(window.location.search);
 
@@ -408,6 +135,7 @@
 
     spinning = true;
     claimBtn.disabled = true;
+    claimBtn.classList.remove("active");
     resultBox.style.display = "none";
     landedIndex = null;
 
@@ -422,10 +150,17 @@
         spinning = false;
         landedIndex = targetIndex;
 
-        resultBox.innerHTML =
-          `✅ <b>Unlocked:</b> ${prizes[targetIndex]}<br/>Tap <b>Claim Bonus</b> to continue to FunBet.Me Promotions, or join Telegram for more offers.`;
+        if (prizes[targetIndex] === "Surprise Bonus") {
+          resultBox.innerHTML =
+            `🎉 <b>Surprise! You won 250% bonus + 100 Free Spins</b><br/>Tap <b>Claim Bonus</b> now to continue to FunBet.Me.`;
+        } else {
+          resultBox.innerHTML =
+            `✅ <b>Unlocked:</b> ${prizes[targetIndex]}<br/>Tap <b>Claim Bonus</b> to continue to FunBet.Me.`;
+        }
+
         resultBox.style.display = "block";
         claimBtn.disabled = false;
+        claimBtn.classList.add("active");
       }
     }
 
@@ -439,15 +174,20 @@
 
   claimBtn.addEventListener("click", ()=>{
     if (claimBtn.disabled) return;
-    if (landedIndex !== null){
-      claimUrlObj.searchParams.set("bonus_value", String(prizeValues[landedIndex]));
-      claimUrlObj.searchParams.set("wheel_prize", prizes[landedIndex]);
+
+    if (landedIndex !== null) {
+      if (prizes[landedIndex] === "Surprise Bonus") {
+        claimUrlObj.searchParams.set("bonus_value", "250");
+        claimUrlObj.searchParams.set("wheel_prize", "250% bonus + 100 Free Spins");
+        claimUrlObj.searchParams.set("offer", "250_100fs");
+      } else {
+        claimUrlObj.searchParams.set("bonus_value", String(prizeValues[landedIndex]));
+        claimUrlObj.searchParams.set("wheel_prize", prizes[landedIndex]);
+      }
     }
+
     window.location.href = claimUrlObj.toString();
   });
 
   drawWheel();
 </script>
-
-</body>
-</html>
