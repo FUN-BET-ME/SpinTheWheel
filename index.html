@@ -4,10 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Spin & Unlock Bonus | FunBet.Me</title>
-
   <meta name="robots" content="noindex,nofollow" />
 
-  <!-- Favicons -->
   <link rel="icon" href="https://funbet.me/favicon.ico" type="image/x-icon">
   <link rel="icon" type="image/png" sizes="32x32"
         href="https://funbet.me/content/wp-content/uploads/2025/12/favicon-32.png">
@@ -22,9 +20,9 @@
       --text:#fff;
       --muted:rgba(255,255,255,.78);
       --stroke:rgba(255,255,255,.12);
+      --soft:rgba(214,179,90,.12);
     }
     *{box-sizing:border-box}
-
     body{
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
@@ -50,7 +48,6 @@
       backdrop-filter: blur(6px);
     }
 
-    /* Hero */
     .hero{
       width:100%;
       overflow:hidden;
@@ -72,8 +69,13 @@
       margin-bottom:10px;
     }
     .brand{display:flex;align-items:center;gap:10px;min-width:0;}
-    .brand img{height:34px;width:auto;display:block;object-fit:contain;}
-
+    .brand img{
+      height:34px;
+      width:auto;
+      display:block;
+      object-fit:contain;
+      border-radius:6px;
+    }
 
     .pill{
       font-size:12px;
@@ -85,8 +87,24 @@
       white-space:nowrap;
     }
 
-    h1{margin:8px 0 6px;font-size:22px;line-height:1.2;}
+    h1{margin:8px 0 8px;font-size:22px;line-height:1.2;}
     p{margin:0 0 14px;color:var(--muted);}
+
+    .subinfo{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin:0 0 16px;
+    }
+    .tag{
+      padding:8px 12px;
+      border-radius:999px;
+      background:var(--soft);
+      border:1px solid rgba(214,179,90,.28);
+      color:#f5df9e;
+      font-size:13px;
+      font-weight:700;
+    }
 
     .wheel-area{
       position:relative;
@@ -116,8 +134,13 @@
       max-width:100%;
     }
 
-    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
-    button{
+    .btnrow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    button, .tg-btn{
       flex:1;
       padding:12px 14px;
       border-radius:14px;
@@ -125,6 +148,9 @@
       cursor:pointer;
       font-weight:800;
       font-size:15px;
+      text-align:center;
+      text-decoration:none;
+      min-width:140px;
     }
     .spin{
       background:linear-gradient(135deg,var(--gold),#f2d37a);
@@ -136,6 +162,11 @@
       border:1px solid rgba(255,255,255,.18);
     }
     .claim[disabled]{opacity:.5;cursor:not-allowed;}
+    .tg-btn{
+      background:#229ED9;
+      color:#fff;
+      border:1px solid rgba(255,255,255,.15);
+    }
 
     .result{
       margin-top:10px;
@@ -150,9 +181,9 @@
     .fine{
       margin-top:14px;
       font-size:12px;
-      opacity:.75;
+      opacity:.78;
       text-align:center;
-      line-height:1.35;
+      line-height:1.45;
     }
     a{color:var(--gold);text-decoration:none;}
 
@@ -179,30 +210,33 @@
   <div class="wrap">
     <div class="card">
 
-
-     <div class="hero">
-  <img
-    class="hero-img"
-    src="https://funbet.me/content/wp-content/uploads/2026/03/Web-mar1-w2.png"
-    alt="FunBet.Me Lucky Spin"
-  />
-</div>
-
+      <div class="hero">
+        <img
+          class="hero-img"
+          src="https://funbet.me/content/wp-content/uploads/2026/03/Web-mar1-w2.png"
+          alt="FunBet.Me Lucky Spin"
+        />
+      </div>
 
       <div class="top">
         <div class="brand">
           <img
-        <img
-  src="https://funbet.me/content/wp-content/uploads/2025/12/FUNBET.ME_FINAL_01072025-01.jpg"
-  alt="FunBet.Me"
-/>
-       
+            src="https://funbet.me/content/wp-content/uploads/2025/12/FUNBET.ME_FINAL_01072025-01.jpg"
+            alt="FunBet.Me"
+          />
         </div>
         <div class="pill">18+ • Terms apply</div>
       </div>
 
-      <h1>Spin to unlock your 250% bonus & 100 Free Spins & upto 10% Cash back 🎁!</h1>
-      <p>Tap spin, see your reward, then claim it on FunBet.Me.</p>
+      <h1>Spin to unlock your 250% bonus + 100 Free Spins + up to 10% Cashback 🎁</h1>
+      <p>Tap spin, reveal your reward, then claim it on FunBet.Me.</p>
+
+      <div class="subinfo">
+        <div class="tag">₺ Rewards Included</div>
+        <div class="tag">Papara Available</div>
+        <div class="tag">Bank Transfer Available</div>
+        <div class="tag">Join Telegram for More Offers</div>
+      </div>
 
       <div class="wheel-area">
         <div class="pointer"></div>
@@ -212,6 +246,7 @@
       <div class="btnrow">
         <button class="spin" id="spinBtn">SPIN</button>
         <button class="claim" id="claimBtn" disabled>Claim Bonus</button>
+        <a class="tg-btn" id="telegramBtn" href="https://t.me/FunBetDotMe" target="_blank" rel="noopener">Join Telegram</a>
       </div>
 
       <div class="result" id="resultBox"></div>
@@ -219,6 +254,8 @@
       <div class="fine">
         Promotional pre-landing page. You’ll be redirected to
         <a id="promoLink" href="#" rel="noopener">FunBet.Me Promotions</a>.
+        <br>
+        Local payment methods may include Papara and Bank Transfer depending on region.
       </div>
 
       <div class="langbar" aria-label="Language">
@@ -234,47 +271,46 @@
   </div>
 
 <script>
-  // ========= CONFIG (GLOBAL / EN) =========
-  const CLAIM_URL  = "https://funbet.me/en/promotions";
-  const BASE_PATH  = "/SpinTheWheel";
+  const CLAIM_URL = "https://funbet.me/en/promotions";
+  const TELEGRAM_URL = "https://t.me/FunBetDotMe";
+  const BASE_PATH = "/SpinTheWheel";
 
   const prizes = [
-    "€10 Bonus",
-    "€15 Bonus",
-    "€20 Bonus 🎯",
+    "₺500 Bonus",
     "25 Free Spins",
+    "₺750 Bonus 🎯",
+    "€12 Bonus",
     "Surprise Bonus",
-    "€12 Bonus"
+    "₺1000 Bonus"
   ];
 
-  // Clean values to send to FunBet later
-  // 0 = spins, -1 = surprise
-  const prizeValues = [10, 15, 20, 0, -1, 12];
+  const prizeValues = [500, 0, 750, 12, -1, 1000];
 
-  // Keep €20 slightly rarer
-  const weights = [18, 18, 12, 17, 17, 18];
-  // =======================================
+  const weights = [18, 17, 13, 18, 16, 18];
 
-  // Preserve tracking params into CLAIM_URL
   const currentParams = new URLSearchParams(window.location.search);
+
   const claimUrlObj = new URL(CLAIM_URL);
   currentParams.forEach((v,k)=> claimUrlObj.searchParams.set(k,v));
   document.getElementById("promoLink").href = claimUrlObj.toString();
 
-  // Language buttons: switch within repo (keep params)
+  const telegramUrlObj = new URL(TELEGRAM_URL);
+  currentParams.forEach((v,k)=> telegramUrlObj.searchParams.set(k,v));
+  document.getElementById("telegramBtn").href = telegramUrlObj.toString();
+
   document.querySelectorAll(".langbtn").forEach(btn => {
     btn.addEventListener("click", () => {
-      const lang = (btn.dataset.lang || "").trim(); // "" => root
+      const lang = (btn.dataset.lang || "").trim();
       const target = lang === "" ? `${BASE_PATH}/` : `${BASE_PATH}/${lang}/`;
       window.location.href = target + (window.location.search || "");
     });
   });
 
-  const canvas   = document.getElementById("wheel");
-  const ctx      = canvas.getContext("2d");
-  const spinBtn  = document.getElementById("spinBtn");
-  const claimBtn = document.getElementById("claimBtn");
-  const resultBox= document.getElementById("resultBox");
+  const canvas    = document.getElementById("wheel");
+  const ctx       = canvas.getContext("2d");
+  const spinBtn   = document.getElementById("spinBtn");
+  const claimBtn  = document.getElementById("claimBtn");
+  const resultBox = document.getElementById("resultBox");
 
   const W = canvas.width, H = canvas.height;
   const cx = W/2, cy = H/2;
@@ -297,7 +333,6 @@
   function drawWheel(){
     ctx.clearRect(0,0,W,H);
 
-    // outer glow ring
     ctx.beginPath();
     ctx.arc(cx, cy, rOuter + 10, 0, Math.PI * 2);
     ctx.fillStyle = "rgba(214,179,90,0.10)";
@@ -316,23 +351,20 @@
       ctx.fillStyle = (i % 2 === 0) ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.18)";
       ctx.fill();
 
-      // gold separators
       ctx.strokeStyle = "rgba(214,179,90,0.28)";
       ctx.lineWidth = 3;
       ctx.stroke();
 
-      // segment label
       ctx.save();
       ctx.translate(cx, cy);
       ctx.rotate(start + seg/2);
       ctx.textAlign = "right";
       ctx.fillStyle = "#fff";
-      ctx.font = "700 22px system-ui, -apple-system, Segoe UI, Roboto, Arial";
+      ctx.font = "700 21px system-ui, -apple-system, Segoe UI, Roboto, Arial";
       ctx.fillText(prizes[i], rOuter - 18, 8);
       ctx.restore();
     }
 
-    // --- Center hub (THIS RESTORES THE "SPIN" CIRCLE) ---
     ctx.beginPath();
     ctx.arc(cx, cy, rInner, 0, Math.PI * 2);
     ctx.fillStyle = "rgba(0,0,0,0.35)";
@@ -357,11 +389,13 @@
     ctx.fillText("SPIN", cx, cy);
   }
 
-  function easeOutCubic(t){ return 1 - Math.pow(1-t, 3); }
+  function easeOutCubic(t){
+    return 1 - Math.pow(1-t, 3);
+  }
 
   function spinToIndex(targetIndex){
     const seg = (Math.PI*2)/prizes.length;
-    const pointerAngle = -Math.PI/2; // top
+    const pointerAngle = -Math.PI/2;
     const targetCenter = pointerAngle - (targetIndex*seg + seg/2);
     const extraTurns = 6;
     const target = targetCenter + extraTurns * Math.PI*2;
@@ -381,16 +415,20 @@
       const t = Math.min(1, (now - start)/duration);
       angle = startAngle + delta * easeOutCubic(t);
       drawWheel();
-      if (t < 1) requestAnimationFrame(frame);
-      else{
+
+      if (t < 1) {
+        requestAnimationFrame(frame);
+      } else {
         spinning = false;
         landedIndex = targetIndex;
 
-        resultBox.innerHTML = `✅ <b>Unlocked:</b> ${prizes[targetIndex]}<br/>Now tap <b>Claim Bonus</b> to activate it on FunBet.Me.`;
+        resultBox.innerHTML =
+          `✅ <b>Unlocked:</b> ${prizes[targetIndex]}<br/>Tap <b>Claim Bonus</b> to continue to FunBet.Me Promotions, or join Telegram for more offers.`;
         resultBox.style.display = "block";
         claimBtn.disabled = false;
       }
     }
+
     requestAnimationFrame(frame);
   }
 
@@ -403,6 +441,7 @@
     if (claimBtn.disabled) return;
     if (landedIndex !== null){
       claimUrlObj.searchParams.set("bonus_value", String(prizeValues[landedIndex]));
+      claimUrlObj.searchParams.set("wheel_prize", prizes[landedIndex]);
     }
     window.location.href = claimUrlObj.toString();
   });
