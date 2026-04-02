@@ -1,243 +1,232 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Крути и забери бонус | FunBet.Me</title>
-<meta name="robots" content="noindex,nofollow">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Крути и получи бонус | FunBet.Me</title>
+  <meta name="robots" content="noindex,nofollow">
 
-<link rel="icon" href="https://funbet.me/favicon.ico">
+  <link rel="icon" href="https://funbet.me/favicon.ico">
 
-<style>
-:root{
-  --bg:#2E004F;
-  --gold:#D6B35A;
-  --gold2:#f2d37a;
-  --text:#fff;
-  --muted:rgba(255,255,255,.85);
-}
+  <style>
+    :root{
+      --bg:#2E004F;
+      --bg2:#3b0a5f;
+      --gold:#D6B35A;
+      --gold2:#f2d37a;
+      --card:rgba(255,255,255,.08);
+      --text:#fff;
+      --muted:rgba(255,255,255,.85);
+      --stroke:rgba(255,255,255,.12);
+      --soft:rgba(214,179,90,.12);
+      --panel:rgba(255,255,255,.05);
+    }
 
-body{
-  margin:0;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto;
-  background:linear-gradient(180deg,#3b0a5f,#2E004F);
-  color:#fff;
-}
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:linear-gradient(180deg,var(--bg2),var(--bg));
+    }
 
-.wrap{
-  max-width:1200px;
-  margin:auto;
-  padding:20px;
-}
+    .page{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+    }
 
-.hero img{
-  width:100%;
-  height:200px;
-  object-fit:cover;
-  border-radius:16px;
-}
+    .shell{
+      width:100%;
+      max-width:1100px;
+      background:var(--card);
+      border-radius:20px;
+      padding:16px;
+    }
 
-h1{
-  font-size:44px;
-  margin:18px 0 8px;
-}
+    h1{
+      font-size:28px;
+      margin-bottom:10px;
+    }
 
-p{
-  font-size:20px;
-  color:var(--muted);
-}
+    .sub{
+      color:var(--muted);
+      margin-bottom:16px;
+    }
 
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:26px;
-  margin-top:20px;
-  align-items:center;
-}
+    .btnrow{
+      display:flex;
+      gap:10px;
+      margin-bottom:12px;
+    }
 
-canvas{
-  width:100%;
-  max-width:480px;
-}
+    button{
+      flex:1;
+      padding:14px;
+      border-radius:12px;
+      border:0;
+      font-weight:700;
+      cursor:pointer;
+    }
 
-.btnrow{
-  display:flex;
-  gap:14px;
-  margin-top:20px;
-}
+    .spin{
+      background:linear-gradient(135deg,var(--gold),var(--gold2));
+      color:#000;
+    }
 
-button{
-  flex:1;
-  padding:18px;
-  font-size:22px;
-  font-weight:800;
-  border-radius:16px;
-  border:0;
-  cursor:pointer;
-}
+    .claim{
+      background:#444;
+      color:#fff;
+    }
 
-.spin{
-  background:linear-gradient(135deg,var(--gold),var(--gold2));
-  color:#2a1a00;
-}
+    .claim.active{
+      background:linear-gradient(135deg,var(--gold),var(--gold2));
+      color:#000;
+    }
 
-.claim{
-  background:rgba(255,255,255,.15);
-  color:#fff;
-}
+    .result{
+      display:none;
+      background:#000;
+      padding:12px;
+      border-radius:10px;
+    }
 
-.claim.active{
-  background:linear-gradient(135deg,var(--gold),var(--gold2));
-  color:#2a1a00;
-  animation:flash .9s infinite;
-}
-
-@keyframes flash{
-  50%{transform:scale(1.05);}
-}
-
-.result{
-  margin-top:14px;
-  padding:14px;
-  background:rgba(0,0,0,.25);
-  border-radius:10px;
-  display:none;
-  font-size:18px;
-}
-
-@media(max-width:900px){
-  .grid{grid-template-columns:1fr;}
-  h1{font-size:26px;}
-  p{font-size:15px;}
-}
-</style>
+    canvas{
+      width:100%;
+      max-width:400px;
+      display:block;
+      margin:0 auto;
+    }
+  </style>
 </head>
 
 <body>
-<div class="wrap">
-
-<div class="hero">
-  <img src="https://funbet.me/content/wp-content/uploads/2026/03/Web-mar1-w2.png">
-</div>
+<div class="page">
+<div class="shell">
 
 <h1>Крути и получи 250% бонус + 100 фриспинов 🎁</h1>
-<p>Нажми «Крутить», открой награду и сразу забери её на FunBet.Me</p>
+<p class="sub">Нажми «Крутить», открой награду и забери бонус.</p>
 
-<div class="grid">
-
-<div>
+<div class="btnrow">
   <button class="spin" id="spinBtn">КРУТИТЬ</button>
   <button class="claim" id="claimBtn" disabled>Забрать бонус</button>
-
-  <div class="result" id="resultBox"></div>
 </div>
 
-<div style="text-align:center">
-  <canvas id="wheel" width="600" height="600"></canvas>
-</div>
+<div id="resultBox" class="result"></div>
+
+<canvas id="wheel"></canvas>
 
 </div>
-
 </div>
 
 <script>
 const CLAIM_URL = "https://funbet.me/ru/promotions";
 
 const prizes = [
-  "₽500 бонус",
-  "25 фриспинов",
-  "₽750 бонус",
-  "Сюрприз",
   "₽1000 бонус",
-  "₽600 бонус"
+  "25 фриспинов",
+  "₽1500 бонус",
+  "Сюрприз 🎁",
+  "₽2000 бонус",
+  "₽1200 бонус"
 ];
 
-const prizeValues = [500,0,750,-1,1000,600];
-const weights = [18,17,18,16,13,18];
+const prizeValues = [1000, 0, 1500, -1, 2000, 1200];
 
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
 
-let angle=0, spinning=false, landedIndex=null;
-
-function pick(){
-  let sum=weights.reduce((a,b)=>a+b,0);
-  let x=Math.random()*sum;
-  for(let i=0;i<weights.length;i++){
-    x-=weights[i];
-    if(x<=0) return i;
-  }
-}
+let angle = 0;
+let spinning = false;
+let landedIndex = null;
 
 function draw(){
-  ctx.clearRect(0,0,600,600);
-  let cx=300, cy=300, r=260;
-  let seg=(Math.PI*2)/prizes.length;
+  const size = 400;
+  canvas.width = size;
+  canvas.height = size;
+
+  const cx = size/2;
+  const cy = size/2;
+  const r = 180;
+
+  const seg = 2*Math.PI/prizes.length;
 
   for(let i=0;i<prizes.length;i++){
-    let s=angle+i*seg;
-    let e=s+seg;
+    const start = angle + i*seg;
+    const end = start + seg;
 
     ctx.beginPath();
     ctx.moveTo(cx,cy);
-    ctx.arc(cx,cy,r,s,e);
-    ctx.fillStyle=i%2?"#3a1b5e":"#4c2c72";
+    ctx.arc(cx,cy,r,start,end);
+    ctx.fillStyle = i%2 ? "#333" : "#555";
     ctx.fill();
 
     ctx.save();
     ctx.translate(cx,cy);
-    ctx.rotate(s+seg/2);
+    ctx.rotate(start + seg/2);
     ctx.fillStyle="#fff";
-    ctx.font="18px Arial";
-    ctx.fillText(prizes[i], r-20,0);
+    ctx.textAlign="right";
+    ctx.font="14px Arial";
+    ctx.fillText(prizes[i], r-10,5);
     ctx.restore();
   }
 }
 
-function spin(i){
-  let seg=(Math.PI*2)/prizes.length;
-  let target=-(i*seg+seg/2)+Math.PI*6;
-  let start=angle;
-  let d=target-start;
-  let t0=performance.now();
+function spin(){
+  if(spinning) return;
+  spinning = true;
 
-  spinning=true;
+  const target = Math.floor(Math.random()*prizes.length);
+  const total = 360*5 + target*(360/prizes.length);
 
-  function anim(t){
-    let p=Math.min(1,(t-t0)/4000);
-    angle=start+d*(1-Math.pow(1-p,3));
+  let current = 0;
+
+  const anim = setInterval(()=>{
+    current += 10;
+    angle = current * Math.PI/180;
     draw();
 
-    if(p<1) requestAnimationFrame(anim);
-    else{
+    if(current >= total){
+      clearInterval(anim);
       spinning=false;
-      landedIndex=i;
+      landedIndex = target;
 
-      let txt = prizes[i]==="Сюрприз"
-        ? "🎉 Сюрприз! Вы получили 250% бонус + 100 фриспинов"
-        : "✅ Выпало: "+prizes[i];
+      const prize = prizes[target];
 
-      document.getElementById("resultBox").innerHTML=txt;
-      document.getElementById("resultBox").style.display="block";
+      if(prize.includes("Сюрприз")){
+        resultBox.innerHTML = "🎉 Ты выиграл <b>250% бонус + 100 фриспинов</b>";
+      } else {
+        resultBox.innerHTML = "✅ Выпало: " + prize;
+      }
 
-      let btn=document.getElementById("claimBtn");
-      btn.disabled=false;
-      btn.classList.add("active");
+      resultBox.style.display="block";
+      claimBtn.disabled=false;
+      claimBtn.classList.add("active");
     }
-  }
 
-  requestAnimationFrame(anim);
+  },20);
 }
 
-document.getElementById("spinBtn").onclick=()=>{
-  if(!spinning) spin(pick());
-};
+spinBtn.onclick = spin;
 
-document.getElementById("claimBtn").onclick=()=>{
-  window.location.href=CLAIM_URL;
+claimBtn.onclick = ()=>{
+  if(landedIndex===null) return;
+
+  const url = new URL(CLAIM_URL);
+
+  if(prizes[landedIndex].includes("Сюрприз")){
+    url.searchParams.set("bonus_value","250");
+  } else {
+    url.searchParams.set("bonus_value", prizeValues[landedIndex]);
+  }
+
+  window.location.href = url.toString();
 };
 
 draw();
 </script>
+
 </body>
 </html>
