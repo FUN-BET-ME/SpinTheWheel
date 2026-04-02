@@ -1,83 +1,104 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>Spin & Unlock Bonus | FunBet.Me</title>
+  <meta name="robots" content="noindex,nofollow">
 
-  <meta name="robots" content="noindex,nofollow" />
-
-  <!-- Favicons -->
   <link rel="icon" href="https://funbet.me/favicon.ico" type="image/x-icon">
-  <link rel="icon" type="image/png" sizes="32x32"
-        href="https://funbet.me/content/wp-content/uploads/2025/12/favicon-32.png">
-  <link rel="apple-touch-icon" sizes="180x180"
-        href="https://funbet.me/content/wp-content/uploads/2025/12/favicon-180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://funbet.me/content/wp-content/uploads/2025/12/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://funbet.me/content/wp-content/uploads/2025/12/favicon-180.png">
 
   <style>
     :root{
       --bg:#2E004F;
+      --bg2:#3b0a5f;
       --gold:#D6B35A;
+      --gold2:#f2d37a;
       --card:rgba(255,255,255,.08);
       --text:#fff;
-      --muted:rgba(255,255,255,.78);
+      --muted:rgba(255,255,255,.85);
       --stroke:rgba(255,255,255,.12);
+      --soft:rgba(214,179,90,.12);
+      --panel:rgba(255,255,255,.05);
     }
+
     *{box-sizing:border-box}
 
-    body{
+    html,body{
       margin:0;
+      min-height:100%;
+    }
+
+    body{
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:
-        radial-gradient(1200px 700px at 50% 18%, rgba(214,179,90,.22), transparent 60%),
-        radial-gradient(900px 500px at 20% 80%, rgba(214,179,90,.10), transparent 60%),
-        var(--bg);
       color:var(--text);
-      display:flex;
+      background:
+        radial-gradient(1200px 700px at 50% 10%, rgba(214,179,90,.18), transparent 60%),
+        radial-gradient(900px 500px at 15% 85%, rgba(214,179,90,.08), transparent 60%),
+        linear-gradient(180deg,var(--bg2),var(--bg));
+    }
+
+    .page{
       min-height:100vh;
+      padding:18px;
+      display:flex;
       align-items:center;
       justify-content:center;
-      padding:18px;
     }
 
-    .wrap{max-width:580px;width:100%;}
-    .card{
+    .shell{
+      width:min(96vw, 1380px);
       background:var(--card);
       border:1px solid var(--stroke);
-      border-radius:22px;
+      border-radius:28px;
       padding:18px;
-      box-shadow:0 20px 60px rgba(0,0,0,.35);
-      backdrop-filter: blur(6px);
+      box-shadow:0 24px 70px rgba(0,0,0,.32);
+      backdrop-filter:blur(8px);
     }
 
-    /* Hero */
     .hero{
       width:100%;
       overflow:hidden;
-      border-radius:16px;
-      margin:6px 0 14px;
+      border-radius:18px;
+      margin:0 0 18px;
       border:1px solid rgba(255,255,255,.10);
       background:rgba(0,0,0,.15);
     }
-    .hero-img{width:100%;height:auto;display:block;object-fit:cover;}
-    @media (min-width:1024px){ .hero-img{ max-height:260px; } }
-    @media (max-width:1023px) and (min-width:600px){ .hero-img{ max-height:220px; } }
-    @media (max-width:599px){ .hero-img{ max-height:160px; } }
 
-    .top{
+    .hero img{
+      width:100%;
+      height:220px;
+      display:block;
+      object-fit:cover;
+      object-position:center;
+    }
+
+    .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:10px;
-      margin-bottom:10px;
+      gap:16px;
+      margin-bottom:14px;
     }
-    .brand{display:flex;align-items:center;gap:10px;min-width:0;}
-    .brand img{height:34px;width:auto;display:block;object-fit:contain;}
 
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .logo img{
+      height:46px;
+      width:auto;
+      display:block;
+      border-radius:8px;
+    }
 
     .pill{
-      font-size:12px;
-      padding:6px 10px;
+      font-size:17px;
+      padding:10px 18px;
       border-radius:999px;
       border:1px solid rgba(214,179,90,.55);
       color:var(--gold);
@@ -85,8 +106,189 @@
       white-space:nowrap;
     }
 
-    h1{margin:8px 0 6px;font-size:22px;line-height:1.2;}
-    p{margin:0 0 14px;color:var(--muted);}
+    .grid{
+      display:grid;
+      grid-template-columns: minmax(420px, 1.12fr) minmax(380px, .88fr);
+      gap:28px;
+      align-items:center;
+    }
+
+    .left{
+      min-width:0;
+    }
+
+    .left-inner{
+      background:var(--panel);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:24px;
+      padding:28px;
+    }
+
+    h1{
+      margin:0 0 14px;
+      font-size:clamp(34px, 4vw, 62px);
+      line-height:1.05;
+      letter-spacing:-.025em;
+      max-width:900px;
+    }
+
+    .sub{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:clamp(18px, 1.6vw, 28px);
+      line-height:1.35;
+    }
+
+    .offer-line{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin:0 0 22px;
+    }
+
+    .tag{
+      padding:12px 18px;
+      border-radius:999px;
+      background:var(--soft);
+      border:1px solid rgba(214,179,90,.30);
+      color:#f5df9e;
+      font-size:clamp(13px, 1.1vw, 18px);
+      font-weight:800;
+      line-height:1;
+      white-space:nowrap;
+    }
+
+    .benefits{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin:0 0 22px;
+    }
+
+    .benefit{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:18px;
+      padding:14px 16px;
+    }
+
+    .benefit strong{
+      display:block;
+      font-size:clamp(16px, 1.3vw, 21px);
+      margin-bottom:4px;
+    }
+
+    .benefit span{
+      color:var(--muted);
+      font-size:clamp(13px, 1vw, 16px);
+      line-height:1.35;
+    }
+
+    .cta-stack{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .btnrow{
+      display:flex;
+      gap:14px;
+    }
+
+    button{
+      flex:1;
+      padding:18px 20px;
+      border-radius:18px;
+      border:0;
+      cursor:pointer;
+      font-weight:900;
+      font-size:clamp(18px, 1.4vw, 28px);
+      text-align:center;
+      transition:all .25s ease;
+      min-height:70px;
+    }
+
+    .spin{
+      background:linear-gradient(135deg,var(--gold),var(--gold2));
+      color:#2a1a00;
+      box-shadow:0 12px 28px rgba(214,179,90,.18);
+    }
+
+    .claim{
+      background:rgba(255,255,255,.12);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.18);
+    }
+
+    .claim:disabled{
+      opacity:.55;
+      cursor:not-allowed;
+      background:rgba(255,255,255,.12);
+      color:#fff;
+      box-shadow:none;
+      animation:none;
+    }
+
+    .claim.active{
+      background:linear-gradient(135deg,var(--gold),var(--gold2)) !important;
+      color:#2a1a00 !important;
+      border:1px solid rgba(214,179,90,.95) !important;
+      box-shadow:0 0 24px rgba(214,179,90,.55);
+      animation:claimFlash .9s infinite;
+    }
+
+    @keyframes claimFlash{
+      0%{
+        transform:scale(1);
+        box-shadow:0 0 10px rgba(214,179,90,.35);
+        opacity:1;
+      }
+      50%{
+        transform:scale(1.025);
+        box-shadow:0 0 30px rgba(214,179,90,.82);
+        opacity:.96;
+      }
+      100%{
+        transform:scale(1);
+        box-shadow:0 0 10px rgba(214,179,90,.35);
+        opacity:1;
+      }
+    }
+
+    .result{
+      padding:16px 18px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.20);
+      display:none;
+      line-height:1.4;
+      font-size:clamp(16px, 1.3vw, 24px);
+    }
+
+    .right{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .wheel-card{
+      width:100%;
+      background:var(--panel);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:24px;
+      padding:20px 18px 18px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .wheel-title{
+      margin:0 0 10px;
+      font-size:clamp(16px, 1.2vw, 22px);
+      color:var(--muted);
+      text-align:center;
+    }
 
     .wheel-area{
       position:relative;
@@ -94,321 +296,459 @@
       flex-direction:column;
       align-items:center;
       justify-content:center;
-      margin:12px 0 6px;
+      width:100%;
     }
 
     .pointer{
       position:relative;
       z-index:10;
-      width:0;height:0;
-      border-left:14px solid transparent;
-      border-right:14px solid transparent;
-      border-top:22px solid var(--gold);
-      margin-bottom:-6px;
+      width:0;
+      height:0;
+      border-left:20px solid transparent;
+      border-right:20px solid transparent;
+      border-top:30px solid var(--gold);
+      margin-bottom:-10px;
       filter:drop-shadow(0 8px 14px rgba(0,0,0,.35));
     }
 
     canvas{
       display:block;
-      width:min(340px,92vw);
-      aspect-ratio:1/1;
+      width:min(100%, 560px);
       height:auto;
       max-width:100%;
     }
 
-    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
-    button{
-      flex:1;
-      padding:12px 14px;
-      border-radius:14px;
-      border:0;
-      cursor:pointer;
-      font-weight:800;
-      font-size:15px;
-    }
-    .spin{
-      background:linear-gradient(135deg,var(--gold),#f2d37a);
-      color:#2a1a00;
-    }
-    .claim{
-      background:rgba(255,255,255,.12);
-      color:#fff;
-      border:1px solid rgba(255,255,255,.18);
-    }
-    .claim[disabled]{opacity:.5;cursor:not-allowed;}
-
-    .result{
-      margin-top:10px;
-      padding:12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(0,0,0,.20);
-      display:none;
-      line-height:1.35;
-    }
-
-    .fine{
-      margin-top:14px;
-      font-size:12px;
-      opacity:.75;
+    .below-wheel{
+      margin-top:12px;
       text-align:center;
-      line-height:1.35;
+      color:var(--muted);
+      font-size:clamp(13px, .95vw, 16px);
+      line-height:1.4;
     }
-    a{color:var(--gold);text-decoration:none;}
+
+    .below-wheel a{
+      color:var(--gold);
+      text-decoration:none;
+    }
 
     .langbar{
       display:flex;
-      gap:8px;
-      justify-content:flex-end;
-      margin-top:10px;
+      gap:10px;
+      justify-content:center;
+      margin-top:18px;
       flex-wrap:wrap;
     }
+
     .langbtn{
-      font-size:12px;
-      padding:6px 10px;
+      font-size:14px;
+      padding:10px 16px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.18);
       background:rgba(255,255,255,.08);
       color:#fff;
       cursor:pointer;
     }
+
+    @media (max-width: 1100px){
+      .hero img{ height:180px; }
+      .grid{
+        grid-template-columns:1fr;
+        gap:18px;
+      }
+      .left-inner,
+      .wheel-card{
+        padding:20px;
+      }
+      canvas{
+        width:min(100%, 440px);
+      }
+    }
+
+    @media (max-width: 640px){
+      .page{ padding:10px; }
+      .shell{
+        width:100%;
+        border-radius:18px;
+        padding:12px;
+      }
+      .hero{
+        border-radius:12px;
+        margin-bottom:12px;
+      }
+      .hero img{
+        height:92px;
+      }
+      .topbar{
+        gap:8px;
+        margin-bottom:8px;
+      }
+      .logo img{
+        height:30px;
+      }
+      .pill{
+        font-size:11px;
+        padding:7px 10px;
+      }
+      .left-inner,
+      .wheel-card{
+        padding:14px 12px;
+        border-radius:16px;
+      }
+      .offer-line{
+        gap:8px;
+        margin-bottom:14px;
+      }
+      .tag{
+        padding:8px 10px;
+        font-size:12px;
+        white-space:normal;
+      }
+      .benefits{
+        grid-template-columns:1fr;
+        gap:8px;
+        margin-bottom:14px;
+      }
+      .benefit{
+        padding:10px 12px;
+        border-radius:14px;
+      }
+      .btnrow{
+        flex-direction:column;
+        gap:10px;
+      }
+      button{
+        min-height:50px;
+        padding:12px 14px;
+        border-radius:14px;
+      }
+      .pointer{
+        border-left:14px solid transparent;
+        border-right:14px solid transparent;
+        border-top:22px solid var(--gold);
+        margin-bottom:-7px;
+      }
+      canvas{
+        width:min(84vw, 320px);
+      }
+      .langbar{
+        gap:8px;
+        margin-top:14px;
+      }
+      .langbtn{
+        font-size:11px;
+        padding:7px 10px;
+      }
+    }
   </style>
 </head>
-
 <body>
-  <div class="wrap">
-    <div class="card">
+  <div class="page">
+    <div class="shell">
 
-
-     <div class="hero">
-  <img
-    class="hero-img"
-    src="https://funbet.me/content/wp-content/uploads/2026/03/Web-mar1-w2.png"
-    alt="FunBet.Me Lucky Spin"
-  />
-</div>
-
-
-      <div class="top">
-        <div class="brand">
-          <img
+      <div class="hero">
         <img
-  src="https://funbet.me/content/wp-content/uploads/2025/12/FUNBET.ME_FINAL_01072025-01.jpg"
-  alt="FunBet.Me"
-/>
-       
+          src="https://funbet.me/content/wp-content/uploads/2026/03/Web-mar1-w2.png"
+          alt="FunBet.Me Lucky Spin"
+        >
+      </div>
+
+      <div class="topbar">
+        <div class="logo">
+          <img
+            src="https://funbet.me/content/wp-content/uploads/2025/12/FUNBET.ME_FINAL_01072025-01.jpg"
+            alt="FunBet.Me"
+          >
         </div>
         <div class="pill">18+ • Terms apply</div>
       </div>
 
-      <h1>Spin to unlock your 250% bonus & 100 Free Spins & upto 10% Cash back 🎁!</h1>
-      <p>Tap spin, see your reward, then claim it on FunBet.Me.</p>
+      <div class="grid">
+        <div class="left">
+          <div class="left-inner">
+            <h1>Spin to unlock your 250% bonus + 100 Free Spins + up to 10% Cashback 🎁</h1>
+            <p class="sub">Tap spin, reveal your reward, then claim it on FunBet.Me.</p>
 
-      <div class="wheel-area">
-        <div class="pointer"></div>
-        <canvas id="wheel" width="620" height="620"></canvas>
-      </div>
+            <div class="offer-line">
+              <div class="tag">€ Rewards Included</div>
+              <div class="tag">Local Payments</div>
+              <div class="tag">Cards Accepted</div>
+              <div class="tag">Crypto Available</div>
+            </div>
 
-      <div class="btnrow">
-        <button class="spin" id="spinBtn">SPIN</button>
-        <button class="claim" id="claimBtn" disabled>Claim Bonus</button>
-      </div>
+            <div class="benefits">
+              <div class="benefit">
+                <strong>Big first deposit offer</strong>
+                <span>Unlock up to 250% bonus plus 100 free spins and cashback rewards.</span>
+              </div>
+              <div class="benefit">
+                <strong>Fast regional payments</strong>
+                <span>Local methods, cards and crypto available depending on your region.</span>
+              </div>
+              <div class="benefit">
+                <strong>Quick mobile journey</strong>
+                <span>Spin, claim, and continue straight to the promotion page in seconds.</span>
+              </div>
+              <div class="benefit">
+                <strong>Real reward trigger</strong>
+                <span>Your spin creates urgency and gives players a reason to continue now.</span>
+              </div>
+            </div>
 
-      <div class="result" id="resultBox"></div>
+            <div class="cta-stack">
+              <div class="btnrow">
+                <button class="spin" id="spinBtn" type="button">SPIN</button>
+                <button class="claim" id="claimBtn" type="button" disabled>Claim Bonus</button>
+              </div>
 
-      <div class="fine">
-        Promotional pre-landing page. You’ll be redirected to
-        <a id="promoLink" href="#" rel="noopener">FunBet.Me Promotions</a>.
+              <div class="result" id="resultBox"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="wheel-card">
+            <div class="wheel-title">Spin the wheel and unlock your reward</div>
+
+            <div class="wheel-area">
+              <div class="pointer"></div>
+              <canvas id="wheel"></canvas>
+            </div>
+
+            <div class="below-wheel">
+              Promotional pre-landing page. You’ll be redirected to
+              <a id="promoLink" href="#" rel="noopener">FunBet.Me Promotions</a>.
+              <br>
+              Local payments, cards and crypto available depending on your region.
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="langbar" aria-label="Language">
-        <button class="langbtn" data-lang="">EN</button>
-        <button class="langbtn" data-lang="tr">TR</button>
-        <button class="langbtn" data-lang="in-en">IN-EN</button>
-        <button class="langbtn" data-lang="in-hi">IN-HI</button>
-        <button class="langbtn" data-lang="ru">RU</button>
-        <button class="langbtn" data-lang="pt-br">PT-BR</button>
+        <button class="langbtn" type="button" data-lang="">EN</button>
+        <button class="langbtn" type="button" data-lang="tr">TR</button>
+        <button class="langbtn" type="button" data-lang="in-en">IN-EN</button>
+        <button class="langbtn" type="button" data-lang="in-hi">IN-HI</button>
+        <button class="langbtn" type="button" data-lang="ru">RU</button>
+        <button class="langbtn" type="button" data-lang="pt-br">PT-BR</button>
       </div>
 
     </div>
   </div>
 
-<script>
-  // ========= CONFIG (GLOBAL / EN) =========
-  const CLAIM_URL  = "https://funbet.me/en/promotions";
-  const BASE_PATH  = "/SpinTheWheel";
+  <script>
+    const CLAIM_URL = "https://funbet.me/en/promotions";
+    const BASE_PATH = "/SpinTheWheel";
 
-  const prizes = [
-    "€10 Bonus",
-    "€15 Bonus",
-    "€20 Bonus 🎯",
-    "25 Free Spins",
-    "Surprise Bonus",
-    "€12 Bonus"
-  ];
+    const prizes = [
+      "€10 Bonus",
+      "25 Free Spins",
+      "€15 Bonus",
+      "Surprise Bonus",
+      "€20 Bonus 🎯",
+      "€12 Bonus"
+    ];
 
-  // Clean values to send to FunBet later
-  // 0 = spins, -1 = surprise
-  const prizeValues = [10, 15, 20, 0, -1, 12];
+    const prizeValues = [10, 0, 15, -1, 20, 12];
+    const weights = [18, 17, 18, 16, 13, 18];
 
-  // Keep €20 slightly rarer
-  const weights = [18, 18, 12, 17, 17, 18];
-  // =======================================
+    const currentParams = new URLSearchParams(window.location.search);
+    const claimUrlObj = new URL(CLAIM_URL);
+    currentParams.forEach((v, k) => claimUrlObj.searchParams.set(k, v));
+    document.getElementById("promoLink").href = claimUrlObj.toString();
 
-  // Preserve tracking params into CLAIM_URL
-  const currentParams = new URLSearchParams(window.location.search);
-  const claimUrlObj = new URL(CLAIM_URL);
-  currentParams.forEach((v,k)=> claimUrlObj.searchParams.set(k,v));
-  document.getElementById("promoLink").href = claimUrlObj.toString();
-
-  // Language buttons: switch within repo (keep params)
-  document.querySelectorAll(".langbtn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const lang = (btn.dataset.lang || "").trim(); // "" => root
-      const target = lang === "" ? `${BASE_PATH}/` : `${BASE_PATH}/${lang}/`;
-      window.location.href = target + (window.location.search || "");
+    document.querySelectorAll(".langbtn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const lang = (btn.dataset.lang || "").trim();
+        const target = lang === "" ? BASE_PATH + "/" : BASE_PATH + "/" + lang + "/";
+        window.location.href = target + (window.location.search || "");
+      });
     });
-  });
 
-  const canvas   = document.getElementById("wheel");
-  const ctx      = canvas.getContext("2d");
-  const spinBtn  = document.getElementById("spinBtn");
-  const claimBtn = document.getElementById("claimBtn");
-  const resultBox= document.getElementById("resultBox");
+    const canvas = document.getElementById("wheel");
+    const ctx = canvas.getContext("2d");
+    const spinBtn = document.getElementById("spinBtn");
+    const claimBtn = document.getElementById("claimBtn");
+    const resultBox = document.getElementById("resultBox");
 
-  const W = canvas.width, H = canvas.height;
-  const cx = W/2, cy = H/2;
-  const rOuter = 300, rInner = 70;
+    let W = 760;
+    let H = 760;
+    let cx = W / 2;
+    let cy = H / 2;
+    let rOuter = 340;
+    let rInner = 78;
 
-  let angle = 0;
-  let spinning = false;
-  let landedIndex = null;
+    let angle = 0;
+    let spinning = false;
+    let landedIndex = null;
 
-  function pickWeightedIndex(){
-    const sum = weights.reduce((a,b)=>a+b,0);
-    let x = Math.random()*sum;
-    for (let i=0;i<weights.length;i++){
-      x -= weights[i];
-      if (x <= 0) return i;
+    function resizeWheel(){
+      const mobile = window.innerWidth <= 640;
+      W = mobile ? 620 : 760;
+      H = W;
+      canvas.width = W;
+      canvas.height = H;
+      cx = W / 2;
+      cy = H / 2;
+      rOuter = mobile ? 280 : 340;
+      rInner = mobile ? 64 : 78;
+      drawWheel();
     }
-    return weights.length - 1;
-  }
 
-  function drawWheel(){
-    ctx.clearRect(0,0,W,H);
+    function pickWeightedIndex(){
+      const sum = weights.reduce((a, b) => a + b, 0);
+      let x = Math.random() * sum;
+      for (let i = 0; i < weights.length; i++) {
+        x -= weights[i];
+        if (x <= 0) return i;
+      }
+      return weights.length - 1;
+    }
 
-    // outer glow ring
-    ctx.beginPath();
-    ctx.arc(cx, cy, rOuter + 10, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(214,179,90,0.10)";
-    ctx.fill();
-
-    const seg = (Math.PI * 2) / prizes.length;
-
-    for (let i=0;i<prizes.length;i++){
-      const start = angle + i*seg;
-      const end   = start + seg;
+    function drawWheel(){
+      ctx.clearRect(0, 0, W, H);
 
       ctx.beginPath();
-      ctx.moveTo(cx, cy);
-      ctx.arc(cx, cy, rOuter, start, end);
-      ctx.closePath();
-      ctx.fillStyle = (i % 2 === 0) ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.18)";
+      ctx.arc(cx, cy, rOuter + 10, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(214,179,90,0.10)";
       ctx.fill();
 
-      // gold separators
-      ctx.strokeStyle = "rgba(214,179,90,0.28)";
-      ctx.lineWidth = 3;
+      const seg = (Math.PI * 2) / prizes.length;
+      const wheelFont = window.innerWidth <= 640 ? 21 : 26;
+      const spinFont = window.innerWidth <= 640 ? 26 : 32;
+
+      for (let i = 0; i < prizes.length; i++) {
+        const start = angle + i * seg;
+        const end = start + seg;
+
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, rOuter, start, end);
+        ctx.closePath();
+        ctx.fillStyle = (i % 2 === 0) ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.18)";
+        ctx.fill();
+
+        ctx.strokeStyle = "rgba(214,179,90,0.28)";
+        ctx.lineWidth = Math.max(2, W / 250);
+        ctx.stroke();
+
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(start + seg / 2);
+        ctx.textAlign = "right";
+        ctx.fillStyle = "#fff";
+        ctx.font = `700 ${wheelFont}px system-ui, -apple-system, Segoe UI, Roboto, Arial`;
+        ctx.fillText(prizes[i], rOuter - 20, 8);
+        ctx.restore();
+      }
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, rInner, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(0,0,0,0.35)";
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, rInner, 0, Math.PI * 2);
+      ctx.strokeStyle = "rgba(214,179,90,0.95)";
+      ctx.lineWidth = Math.max(4, W / 130);
       ctx.stroke();
 
-      // segment label
-      ctx.save();
-      ctx.translate(cx, cy);
-      ctx.rotate(start + seg/2);
-      ctx.textAlign = "right";
-      ctx.fillStyle = "#fff";
-      ctx.font = "700 22px system-ui, -apple-system, Segoe UI, Roboto, Arial";
-      ctx.fillText(prizes[i], rOuter - 18, 8);
-      ctx.restore();
+      ctx.beginPath();
+      ctx.arc(cx, cy, rInner - Math.max(6, W / 90), 0, Math.PI * 2);
+      ctx.strokeStyle = "rgba(214,179,90,0.35)";
+      ctx.lineWidth = Math.max(2, W / 280);
+      ctx.stroke();
+
+      ctx.fillStyle = "rgba(214,179,90,0.98)";
+      ctx.font = `900 ${spinFont}px system-ui, -apple-system, Segoe UI, Roboto, Arial`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("SPIN", cx, cy);
     }
 
-    // --- Center hub (THIS RESTORES THE "SPIN" CIRCLE) ---
-    ctx.beginPath();
-    ctx.arc(cx, cy, rInner, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(0,0,0,0.35)";
-    ctx.fill();
+    function easeOutCubic(t){
+      return 1 - Math.pow(1 - t, 3);
+    }
 
-    ctx.beginPath();
-    ctx.arc(cx, cy, rInner, 0, Math.PI * 2);
-    ctx.strokeStyle = "rgba(214,179,90,0.95)";
-    ctx.lineWidth = 6;
-    ctx.stroke();
+    function enableClaimButton(){
+      claimBtn.disabled = false;
+      claimBtn.classList.add("active");
+    }
 
-    ctx.beginPath();
-    ctx.arc(cx, cy, rInner - 10, 0, Math.PI * 2);
-    ctx.strokeStyle = "rgba(214,179,90,0.35)";
-    ctx.lineWidth = 2;
-    ctx.stroke();
+    function disableClaimButton(){
+      claimBtn.disabled = true;
+      claimBtn.classList.remove("active");
+    }
 
-    ctx.fillStyle = "rgba(214,179,90,0.98)";
-    ctx.font = "900 24px system-ui, -apple-system, Segoe UI, Roboto, Arial";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText("SPIN", cx, cy);
-  }
+    function spinToIndex(targetIndex){
+      const seg = (Math.PI * 2) / prizes.length;
+      const pointerAngle = -Math.PI / 2;
+      const targetCenter = pointerAngle - (targetIndex * seg + seg / 2);
+      const extraTurns = 6;
+      const target = targetCenter + extraTurns * Math.PI * 2;
 
-  function easeOutCubic(t){ return 1 - Math.pow(1-t, 3); }
+      const startAngle = angle;
+      const delta = target - startAngle;
 
-  function spinToIndex(targetIndex){
-    const seg = (Math.PI*2)/prizes.length;
-    const pointerAngle = -Math.PI/2; // top
-    const targetCenter = pointerAngle - (targetIndex*seg + seg/2);
-    const extraTurns = 6;
-    const target = targetCenter + extraTurns * Math.PI*2;
+      const duration = 4200;
+      const start = performance.now();
 
-    const startAngle = angle;
-    const delta = target - startAngle;
+      spinning = true;
+      disableClaimButton();
+      resultBox.style.display = "none";
+      landedIndex = null;
 
-    const duration = 4200;
-    const start = performance.now();
+      function frame(now){
+        const t = Math.min(1, (now - start) / duration);
+        angle = startAngle + delta * easeOutCubic(t);
+        drawWheel();
 
-    spinning = true;
-    claimBtn.disabled = true;
-    resultBox.style.display = "none";
-    landedIndex = null;
+        if (t < 1) {
+          requestAnimationFrame(frame);
+        } else {
+          spinning = false;
+          landedIndex = targetIndex;
 
-    function frame(now){
-      const t = Math.min(1, (now - start)/duration);
-      angle = startAngle + delta * easeOutCubic(t);
-      drawWheel();
-      if (t < 1) requestAnimationFrame(frame);
-      else{
-        spinning = false;
-        landedIndex = targetIndex;
+          const landedPrize = prizes[landedIndex];
 
-        resultBox.innerHTML = `✅ <b>Unlocked:</b> ${prizes[targetIndex]}<br/>Now tap <b>Claim Bonus</b> to activate it on FunBet.Me.`;
-        resultBox.style.display = "block";
-        claimBtn.disabled = false;
+          if (landedPrize === "Surprise Bonus") {
+            resultBox.innerHTML = "🎉 <b>Surprise! You won 250% bonus + 100 Free Spins</b><br>Tap <b>Claim Bonus</b> now to continue to FunBet.Me.";
+          } else {
+            resultBox.innerHTML = "✅ <b>Unlocked:</b> " + landedPrize + "<br>Tap <b>Claim Bonus</b> to continue to FunBet.Me Promotions.";
+          }
+
+          resultBox.style.display = "block";
+          enableClaimButton();
+        }
       }
+
+      requestAnimationFrame(frame);
     }
-    requestAnimationFrame(frame);
-  }
 
-  spinBtn.addEventListener("click", ()=>{
-    if (spinning) return;
-    spinToIndex(pickWeightedIndex());
-  });
+    spinBtn.addEventListener("click", () => {
+      if (spinning) return;
+      spinToIndex(pickWeightedIndex());
+    });
 
-  claimBtn.addEventListener("click", ()=>{
-    if (claimBtn.disabled) return;
-    if (landedIndex !== null){
-      claimUrlObj.searchParams.set("bonus_value", String(prizeValues[landedIndex]));
-    }
-    window.location.href = claimUrlObj.toString();
-  });
+    claimBtn.addEventListener("click", () => {
+      if (claimBtn.disabled || landedIndex === null) return;
 
-  drawWheel();
-</script>
+      const landedPrize = prizes[landedIndex];
 
+      if (landedPrize === "Surprise Bonus") {
+        claimUrlObj.searchParams.set("bonus_value", "250");
+        claimUrlObj.searchParams.set("wheel_prize", "250% bonus + 100 Free Spins");
+        claimUrlObj.searchParams.set("offer", "250_100fs");
+      } else {
+        claimUrlObj.searchParams.set("bonus_value", String(prizeValues[landedIndex]));
+        claimUrlObj.searchParams.set("wheel_prize", landedPrize);
+      }
+
+      window.location.href = claimUrlObj.toString();
+    });
+
+    window.addEventListener("resize", resizeWheel);
+    resizeWheel();
+  </script>
 </body>
 </html>
