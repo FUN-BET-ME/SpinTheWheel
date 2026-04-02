@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>Spin & Unlock Bonus | FunBet.Me</title>
   <meta name="robots" content="noindex,nofollow">
 
@@ -17,30 +17,30 @@
       --gold2:#f2d37a;
       --card:rgba(255,255,255,.08);
       --text:#fff;
-      --muted:rgba(255,255,255,.78);
+      --muted:rgba(255,255,255,.82);
       --stroke:rgba(255,255,255,.12);
       --soft:rgba(214,179,90,.12);
 
-      /* dynamic fit variables */
-      --hero-h:110px;
-      --logo-h:34px;
-      --title-size:18px;
-      --text-size:14px;
-      --tag-size:12px;
-      --tag-pad-y:7px;
-      --tag-pad-x:10px;
-      --card-pad:12px;
-      --wheel-size:min(290px,80vw);
-      --wheel-canvas:540;
-      --wheel-outer:245;
-      --wheel-inner:58;
-      --wheel-font:18px;
-      --spin-font:20px;
-      --btn-size:15px;
-      --btn-pad-y:11px;
-      --btn-pad-x:12px;
-      --result-size:14px;
-      --fine-size:11px;
+      --page-pad: clamp(10px, 2vw, 24px);
+      --card-pad: clamp(12px, 1.4vw, 18px);
+      --card-radius: clamp(18px, 2vw, 24px);
+
+      --max-card: 900px;
+      --hero-h: clamp(110px, 18vw, 190px);
+      --logo-h: clamp(28px, 4vw, 44px);
+
+      --h1: clamp(24px, 3vw, 44px);
+      --body: clamp(15px, 1.5vw, 24px);
+      --tag: clamp(12px, 1vw, 16px);
+      --btn: clamp(16px, 1.3vw, 22px);
+      --fine: clamp(11px, .9vw, 14px);
+
+      --wheel-display: min(50vw, 430px);
+      --wheel-canvas: 760;
+      --wheel-outer: 340;
+      --wheel-inner: 78;
+      --wheel-font: 26;
+      --spin-font: 32;
     }
 
     *{box-sizing:border-box}
@@ -52,45 +52,34 @@
 
     body{
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
       background:
         radial-gradient(1200px 700px at 50% 18%, rgba(214,179,90,.22), transparent 60%),
         radial-gradient(900px 500px at 20% 80%, rgba(214,179,90,.10), transparent 60%),
         var(--bg);
-      color:var(--text);
-      display:flex;
-      min-height:100vh;
-      align-items:center;
-      justify-content:center;
-      padding:8px;
-      overflow:hidden; /* keeps page no-scroll */
+      padding:var(--page-pad);
     }
 
     .wrap{
-      width:100%;
-      max-width:540px;
-      max-height:calc(100vh - 16px);
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      width:min(100%, var(--max-card));
+      margin:0 auto;
     }
 
     .card{
       width:100%;
-      max-height:calc(100vh - 16px);
-      overflow:hidden;
       background:var(--card);
       border:1px solid var(--stroke);
-      border-radius:18px;
+      border-radius:var(--card-radius);
       padding:var(--card-pad);
-      box-shadow:0 16px 40px rgba(0,0,0,.32);
+      box-shadow:0 20px 60px rgba(0,0,0,.30);
       backdrop-filter:blur(6px);
     }
 
     .hero{
       width:100%;
       overflow:hidden;
-      border-radius:12px;
-      margin:0 0 8px;
+      border-radius:clamp(12px, 1.5vw, 18px);
+      margin:0 0 14px;
       border:1px solid rgba(255,255,255,.10);
       background:rgba(0,0,0,.15);
     }
@@ -107,8 +96,8 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:8px;
-      margin-bottom:6px;
+      gap:12px;
+      margin-bottom:10px;
     }
 
     .brand img{
@@ -116,48 +105,52 @@
       width:auto;
       display:block;
       object-fit:contain;
-      border-radius:6px;
+      border-radius:8px;
     }
 
     .pill{
-      font-size:11px;
-      padding:5px 10px;
+      font-size:clamp(12px, 1vw, 18px);
+      padding:.55em 1em;
       border-radius:999px;
       border:1px solid rgba(214,179,90,.55);
       color:var(--gold);
       background:rgba(214,179,90,.10);
       white-space:nowrap;
+      flex-shrink:0;
     }
 
     h1{
-      margin:6px 0 6px;
-      font-size:var(--title-size);
-      line-height:1.18;
+      margin:0 0 10px;
+      font-size:var(--h1);
+      line-height:1.12;
+      letter-spacing:-.02em;
+      max-width:900px;
     }
 
     p{
-      margin:0 0 10px;
+      margin:0 0 14px;
       color:var(--muted);
-      font-size:var(--text-size);
-      line-height:1.3;
+      font-size:var(--body);
+      line-height:1.35;
     }
 
     .subinfo{
       display:flex;
       flex-wrap:wrap;
-      gap:8px;
-      margin:0 0 8px;
+      gap:10px;
+      margin:0 0 18px;
     }
 
     .tag{
-      padding:var(--tag-pad-y) var(--tag-pad-x);
+      padding:.65em 1.05em;
       border-radius:999px;
       background:var(--soft);
-      border:1px solid rgba(214,179,90,.28);
+      border:1px solid rgba(214,179,90,.30);
       color:#f5df9e;
-      font-size:var(--tag-size);
-      font-weight:700;
+      font-size:var(--tag);
+      font-weight:800;
       line-height:1;
+      white-space:nowrap;
     }
 
     .wheel-area{
@@ -166,7 +159,7 @@
       flex-direction:column;
       align-items:center;
       justify-content:center;
-      margin:4px 0;
+      margin:4px 0 10px;
     }
 
     .pointer{
@@ -174,37 +167,37 @@
       z-index:10;
       width:0;
       height:0;
-      border-left:12px solid transparent;
-      border-right:12px solid transparent;
-      border-top:20px solid var(--gold);
-      margin-bottom:-6px;
+      border-left:16px solid transparent;
+      border-right:16px solid transparent;
+      border-top:26px solid var(--gold);
+      margin-bottom:-8px;
       filter:drop-shadow(0 8px 14px rgba(0,0,0,.35));
     }
 
     canvas{
       display:block;
-      width:var(--wheel-size);
-      height:var(--wheel-size);
+      width:var(--wheel-display);
+      height:var(--wheel-display);
       max-width:100%;
-      max-height:100%;
     }
 
     .btnrow{
       display:flex;
-      gap:10px;
-      margin-top:8px;
+      gap:12px;
+      margin-top:12px;
     }
 
     button{
       flex:1;
-      padding:var(--btn-pad-y) var(--btn-pad-x);
-      border-radius:12px;
+      padding:.95em 1em;
+      border-radius:16px;
       border:0;
       cursor:pointer;
-      font-weight:800;
-      font-size:var(--btn-size);
+      font-weight:900;
+      font-size:var(--btn);
       text-align:center;
       transition:all .25s ease;
+      min-height:56px;
     }
 
     .spin{
@@ -242,8 +235,8 @@
         opacity:1;
       }
       50%{
-        transform:scale(1.04);
-        box-shadow:0 0 28px rgba(214,179,90,.85);
+        transform:scale(1.03);
+        box-shadow:0 0 28px rgba(214,179,90,.82);
         opacity:.96;
       }
       100%{
@@ -254,22 +247,22 @@
     }
 
     .result{
-      margin-top:8px;
-      padding:10px;
-      border-radius:12px;
+      margin-top:12px;
+      padding:12px 14px;
+      border-radius:14px;
       border:1px solid rgba(255,255,255,.14);
       background:rgba(0,0,0,.20);
       display:none;
-      line-height:1.3;
-      font-size:var(--result-size);
+      line-height:1.35;
+      font-size:var(--body);
     }
 
     .fine{
-      margin-top:8px;
-      font-size:var(--fine-size);
-      opacity:.78;
+      margin-top:12px;
+      font-size:var(--fine);
+      opacity:.82;
       text-align:center;
-      line-height:1.35;
+      line-height:1.4;
     }
 
     a{
@@ -279,15 +272,15 @@
 
     .langbar{
       display:flex;
-      gap:6px;
+      gap:8px;
       justify-content:flex-end;
-      margin-top:8px;
+      margin-top:12px;
       flex-wrap:wrap;
     }
 
     .langbtn{
-      font-size:11px;
-      padding:5px 9px;
+      font-size:clamp(11px, .9vw, 14px);
+      padding:.55em 1em;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.18);
       background:rgba(255,255,255,.08);
@@ -295,94 +288,96 @@
       cursor:pointer;
     }
 
-    /* medium laptops */
-    @media (max-height: 900px){
+    @media (max-width: 900px){
       :root{
-        --hero-h:95px;
-        --logo-h:30px;
-        --title-size:16px;
-        --text-size:13px;
-        --tag-size:11px;
-        --tag-pad-y:6px;
-        --tag-pad-x:9px;
-        --card-pad:10px;
-        --wheel-size:min(255px,72vw);
-        --wheel-canvas:500;
-        --wheel-outer:225;
-        --wheel-inner:54;
-        --wheel-font:16px;
-        --spin-font:18px;
-        --btn-size:14px;
-        --btn-pad-y:10px;
-        --btn-pad-x:10px;
-        --result-size:13px;
-        --fine-size:10px;
+        --max-card: 720px;
+        --hero-h: clamp(105px, 24vw, 170px);
+        --wheel-display: min(62vw, 380px);
       }
     }
 
-    /* shorter laptops */
-    @media (max-height: 800px){
+    @media (max-width: 640px){
       :root{
-        --hero-h:82px;
-        --logo-h:26px;
-        --title-size:15px;
-        --text-size:12px;
-        --tag-size:10px;
-        --tag-pad-y:5px;
-        --tag-pad-x:8px;
-        --card-pad:9px;
-        --wheel-size:min(220px,62vw);
-        --wheel-canvas:440;
-        --wheel-outer:198;
-        --wheel-inner:48;
-        --wheel-font:14px;
-        --spin-font:16px;
-        --btn-size:13px;
-        --btn-pad-y:9px;
-        --btn-pad-x:8px;
-        --result-size:12px;
-        --fine-size:9px;
+        --page-pad: 10px;
+        --card-pad: 12px;
+        --hero-h: clamp(86px, 28vw, 130px);
+        --logo-h: 30px;
+        --h1: clamp(18px, 7vw, 28px);
+        --body: clamp(13px, 4vw, 16px);
+        --tag: 12px;
+        --btn: 16px;
+        --fine: 11px;
+        --wheel-display: min(78vw, 320px);
+        --wheel-canvas: 620;
+        --wheel-outer: 280;
+        --wheel-inner: 64;
+        --wheel-font: 21;
+        --spin-font: 26;
       }
 
-      .subinfo{ gap:6px; margin-bottom:6px; }
-      .btnrow{ margin-top:6px; }
-      .fine{ margin-top:6px; }
-      .langbar{ margin-top:6px; }
-    }
-
-    /* very short screens */
-    @media (max-height: 700px){
-      :root{
-        --hero-h:68px;
-        --logo-h:22px;
-        --title-size:13px;
-        --text-size:11px;
-        --tag-size:9px;
-        --tag-pad-y:4px;
-        --tag-pad-x:7px;
-        --card-pad:8px;
-        --wheel-size:min(185px,52vw);
-        --wheel-canvas:380;
-        --wheel-outer:170;
-        --wheel-inner:42;
-        --wheel-font:12px;
-        --spin-font:14px;
-        --btn-size:12px;
-        --btn-pad-y:8px;
-        --btn-pad-x:8px;
-        --result-size:11px;
-        --fine-size:8px;
+      .top{
+        gap:8px;
       }
 
-      .top{ margin-bottom:4px; }
-      h1{ margin:4px 0; }
-      p{ margin:0 0 6px; }
-      .subinfo{ gap:5px; margin-bottom:5px; }
-      .wheel-area{ margin:2px 0; }
+      .pill{
+        font-size:12px;
+        padding:.5em .8em;
+      }
+
+      .subinfo{
+        gap:8px;
+        margin-bottom:14px;
+      }
+
+      .tag{
+        white-space:normal;
+      }
+
       .pointer{
-        border-left-width:10px;
-        border-right-width:10px;
-        border-top-width:16px;
+        border-left:14px solid transparent;
+        border-right:14px solid transparent;
+        border-top:22px solid var(--gold);
+      }
+
+      .btnrow{
+        gap:10px;
+      }
+
+      button{
+        min-height:50px;
+        border-radius:14px;
+      }
+    }
+
+    @media (max-width: 430px){
+      :root{
+        --hero-h: 82px;
+        --wheel-display: min(82vw, 290px);
+        --wheel-canvas: 560;
+        --wheel-outer: 252;
+        --wheel-inner: 58;
+        --wheel-font: 18;
+        --spin-font: 22;
+      }
+
+      .top{
+        align-items:flex-start;
+      }
+
+      .pill{
+        font-size:11px;
+      }
+
+      .btnrow{
+        flex-direction:column;
+      }
+
+      button{
+        width:100%;
+      }
+
+      .langbar{
+        justify-content:center;
       }
     }
   </style>
@@ -485,33 +480,32 @@
     const claimBtn = document.getElementById("claimBtn");
     const resultBox = document.getElementById("resultBox");
 
-    let W = 540;
-    let H = 540;
+    let W = 760;
+    let H = 760;
     let cx = W / 2;
     let cy = H / 2;
-    let rOuter = 245;
-    let rInner = 58;
+    let rOuter = 340;
+    let rInner = 78;
 
     let angle = 0;
     let spinning = false;
     let landedIndex = null;
 
-    function cssVarNumber(name, fallback){
+    function cssNumber(name, fallback){
       const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
       const num = parseFloat(value);
       return Number.isFinite(num) ? num : fallback;
     }
 
     function resizeWheel(){
-      const size = cssVarNumber('--wheel-canvas', 540);
-      W = size;
-      H = size;
+      W = cssNumber('--wheel-canvas', 760);
+      H = W;
       canvas.width = W;
       canvas.height = H;
       cx = W / 2;
       cy = H / 2;
-      rOuter = cssVarNumber('--wheel-outer', 245);
-      rInner = cssVarNumber('--wheel-inner', 58);
+      rOuter = cssNumber('--wheel-outer', 340);
+      rInner = cssNumber('--wheel-inner', 78);
       drawWheel();
     }
 
@@ -529,13 +523,13 @@
       ctx.clearRect(0, 0, W, H);
 
       ctx.beginPath();
-      ctx.arc(cx, cy, rOuter + 8, 0, Math.PI * 2);
+      ctx.arc(cx, cy, rOuter + 10, 0, Math.PI * 2);
       ctx.fillStyle = "rgba(214,179,90,0.10)";
       ctx.fill();
 
       const seg = (Math.PI * 2) / prizes.length;
-      const wheelFont = cssVarNumber('--wheel-font', 18);
-      const spinFont = cssVarNumber('--spin-font', 20);
+      const wheelFont = cssNumber('--wheel-font', 26);
+      const spinFont = cssNumber('--spin-font', 32);
 
       for (let i = 0; i < prizes.length; i++) {
         const start = angle + i * seg;
@@ -549,7 +543,7 @@
         ctx.fill();
 
         ctx.strokeStyle = "rgba(214,179,90,0.28)";
-        ctx.lineWidth = 3;
+        ctx.lineWidth = Math.max(2, W / 250);
         ctx.stroke();
 
         ctx.save();
@@ -558,7 +552,7 @@
         ctx.textAlign = "right";
         ctx.fillStyle = "#fff";
         ctx.font = `700 ${wheelFont}px system-ui, -apple-system, Segoe UI, Roboto, Arial`;
-        ctx.fillText(prizes[i], rOuter - 16, 6);
+        ctx.fillText(prizes[i], rOuter - 20, 8);
         ctx.restore();
       }
 
@@ -570,13 +564,13 @@
       ctx.beginPath();
       ctx.arc(cx, cy, rInner, 0, Math.PI * 2);
       ctx.strokeStyle = "rgba(214,179,90,0.95)";
-      ctx.lineWidth = 6;
+      ctx.lineWidth = Math.max(4, W / 130);
       ctx.stroke();
 
       ctx.beginPath();
-      ctx.arc(cx, cy, rInner - 9, 0, Math.PI * 2);
+      ctx.arc(cx, cy, rInner - Math.max(6, W / 90), 0, Math.PI * 2);
       ctx.strokeStyle = "rgba(214,179,90,0.35)";
-      ctx.lineWidth = 2;
+      ctx.lineWidth = Math.max(2, W / 280);
       ctx.stroke();
 
       ctx.fillStyle = "rgba(214,179,90,0.98)";
