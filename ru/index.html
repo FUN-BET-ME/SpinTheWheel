@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="hi">
+<html lang="ru">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>Spin karke Bonus Unlock karo | FunBet.Me</title>
+  <title>Крути и забери бонус | FunBet.Me</title>
   <meta name="robots" content="noindex,nofollow">
 
   <link rel="icon" href="https://funbet.me/favicon.ico">
@@ -15,6 +15,8 @@
       --gold2:#f2d37a;
       --text:#fff;
       --muted:rgba(255,255,255,.85);
+      --card:rgba(255,255,255,.08);
+      --stroke:rgba(255,255,255,.12);
     }
 
     *{box-sizing:border-box}
@@ -26,53 +28,53 @@
     }
 
     .wrap{
-      max-width:1100px;
+      max-width:1200px;
       margin:auto;
-      padding:18px;
+      padding:20px;
     }
 
     .hero img{
       width:100%;
-      height:180px;
+      height:200px;
       object-fit:cover;
-      border-radius:14px;
+      border-radius:16px;
     }
 
     h1{
-      font-size:42px;
-      margin:18px 0 8px;
+      font-size:48px;
+      margin:20px 0 10px;
     }
 
     p{
-      font-size:20px;
+      font-size:22px;
       color:var(--muted);
     }
 
     .grid{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:24px;
+      gap:30px;
       margin-top:20px;
       align-items:center;
     }
 
     canvas{
       width:100%;
-      max-width:440px;
+      max-width:480px;
     }
 
     .btnrow{
       display:flex;
-      gap:12px;
-      margin-top:18px;
+      gap:15px;
+      margin-top:20px;
     }
 
     button{
       flex:1;
-      padding:16px;
-      font-size:20px;
+      padding:18px;
+      font-size:22px;
       font-weight:800;
-      border-radius:14px;
+      border-radius:16px;
       border:0;
       cursor:pointer;
     }
@@ -98,18 +100,18 @@
     }
 
     .result{
-      margin-top:14px;
-      padding:14px;
-      background:rgba(0,0,0,.25);
-      border-radius:10px;
+      margin-top:15px;
+      padding:15px;
+      background:rgba(0,0,0,.2);
+      border-radius:12px;
       display:none;
-      font-size:18px;
+      font-size:20px;
     }
 
-    @media(max-width:850px){
+    @media(max-width:900px){
       .grid{grid-template-columns:1fr;}
-      h1{font-size:26px;}
-      p{font-size:15px;}
+      h1{font-size:28px;}
+      p{font-size:16px;}
     }
   </style>
 </head>
@@ -121,14 +123,14 @@
     <img src="https://funbet.me/content/wp-content/uploads/2026/03/Web-mar1-w2.png">
   </div>
 
-  <h1>Spin karke 250% Bonus + 100 Free Spins + Cashback jeeto 🎁</h1>
-  <p>Spin karo, reward dekho aur turant FunBet.Me par claim karo</p>
+  <h1>Крути и открой бонус 250% + 100 фриспинов + до 10% кэшбэка 🎁</h1>
+  <p>Нажми «Крутить», получи награду и забери бонус на FunBet.Me</p>
 
   <div class="grid">
 
     <div>
-      <button class="spin" id="spinBtn">SPIN</button>
-      <button class="claim" id="claimBtn" disabled>Claim Bonus</button>
+      <button class="spin" id="spinBtn">КРУТИТЬ</button>
+      <button class="claim" id="claimBtn" disabled>Забрать бонус</button>
 
       <div class="result" id="resultBox"></div>
     </div>
@@ -142,15 +144,15 @@
 </div>
 
 <script>
-const CLAIM_URL = "https://funbet.me/in-hi/promotions";
+const CLAIM_URL = "https://funbet.me/ru/promotions";
 
 const prizes = [
-  "₹500 Bonus",
-  "25 Free Spins",
-  "₹750 Bonus",
-  "Surprise",
-  "₹1000 Bonus",
-  "₹600 Bonus"
+  "₽500 Бонус",
+  "25 Фриспинов",
+  "₽750 Бонус",
+  "Сюрприз",
+  "₽1000 Бонус",
+  "₽600 Бонус"
 ];
 
 const prizeValues = [500,0,750,-1,1000,600];
@@ -214,9 +216,9 @@ function spin(i){
       spinning=false;
       landedIndex=i;
 
-      let txt = prizes[i]==="Surprise"
-        ? "🎉 Surprise! Tumne 250% bonus + 100 free spins jeete"
-        : "✅ Mila: "+prizes[i];
+      let txt = prizes[i]==="Сюрприз"
+        ? "🎉 Сюрприз! Ты выиграл 250% бонус + 100 фриспинов"
+        : "✅ Выпало: "+prizes[i];
 
       document.getElementById("resultBox").innerHTML=txt;
       document.getElementById("resultBox").style.display="block";
