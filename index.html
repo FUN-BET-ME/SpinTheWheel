@@ -20,12 +20,37 @@
       --muted:rgba(255,255,255,.78);
       --stroke:rgba(255,255,255,.12);
       --soft:rgba(214,179,90,.12);
+
+      /* dynamic fit variables */
+      --hero-h:110px;
+      --logo-h:34px;
+      --title-size:18px;
+      --text-size:14px;
+      --tag-size:12px;
+      --tag-pad-y:7px;
+      --tag-pad-x:10px;
+      --card-pad:12px;
+      --wheel-size:min(290px,80vw);
+      --wheel-canvas:540;
+      --wheel-outer:245;
+      --wheel-inner:58;
+      --wheel-font:18px;
+      --spin-font:20px;
+      --btn-size:15px;
+      --btn-pad-y:11px;
+      --btn-pad-x:12px;
+      --result-size:14px;
+      --fine-size:11px;
     }
 
     *{box-sizing:border-box}
 
-    body{
+    html,body{
       margin:0;
+      min-height:100%;
+    }
+
+    body{
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:
         radial-gradient(1200px 700px at 50% 18%, rgba(214,179,90,.22), transparent 60%),
@@ -36,19 +61,27 @@
       min-height:100vh;
       align-items:center;
       justify-content:center;
-      padding:10px;
+      padding:8px;
+      overflow:hidden; /* keeps page no-scroll */
     }
 
     .wrap{
-      max-width:540px;
       width:100%;
+      max-width:540px;
+      max-height:calc(100vh - 16px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
 
     .card{
+      width:100%;
+      max-height:calc(100vh - 16px);
+      overflow:hidden;
       background:var(--card);
       border:1px solid var(--stroke);
       border-radius:18px;
-      padding:12px;
+      padding:var(--card-pad);
       box-shadow:0 16px 40px rgba(0,0,0,.32);
       backdrop-filter:blur(6px);
     }
@@ -57,17 +90,17 @@
       width:100%;
       overflow:hidden;
       border-radius:12px;
-      margin:0 0 10px;
+      margin:0 0 8px;
       border:1px solid rgba(255,255,255,.10);
       background:rgba(0,0,0,.15);
     }
 
     .hero-img{
       width:100%;
-      height:auto;
+      height:var(--hero-h);
       display:block;
       object-fit:cover;
-      max-height:150px;
+      object-position:center;
     }
 
     .top{
@@ -75,11 +108,11 @@
       align-items:center;
       justify-content:space-between;
       gap:8px;
-      margin-bottom:8px;
+      margin-bottom:6px;
     }
 
     .brand img{
-      height:34px;
+      height:var(--logo-h);
       width:auto;
       display:block;
       object-fit:contain;
@@ -98,32 +131,33 @@
 
     h1{
       margin:6px 0 6px;
-      font-size:18px;
-      line-height:1.2;
+      font-size:var(--title-size);
+      line-height:1.18;
     }
 
     p{
       margin:0 0 10px;
       color:var(--muted);
-      font-size:14px;
-      line-height:1.35;
+      font-size:var(--text-size);
+      line-height:1.3;
     }
 
     .subinfo{
       display:flex;
       flex-wrap:wrap;
       gap:8px;
-      margin:0 0 10px;
+      margin:0 0 8px;
     }
 
     .tag{
-      padding:7px 10px;
+      padding:var(--tag-pad-y) var(--tag-pad-x);
       border-radius:999px;
       background:var(--soft);
       border:1px solid rgba(214,179,90,.28);
       color:#f5df9e;
-      font-size:12px;
+      font-size:var(--tag-size);
       font-weight:700;
+      line-height:1;
     }
 
     .wheel-area{
@@ -132,7 +166,7 @@
       flex-direction:column;
       align-items:center;
       justify-content:center;
-      margin:6px 0 4px;
+      margin:4px 0;
     }
 
     .pointer{
@@ -149,29 +183,27 @@
 
     canvas{
       display:block;
-      width:min(290px,80vw);
-      aspect-ratio:1/1;
-      height:auto;
+      width:var(--wheel-size);
+      height:var(--wheel-size);
       max-width:100%;
+      max-height:100%;
     }
 
     .btnrow{
       display:flex;
       gap:10px;
-      flex-wrap:wrap;
-      margin-top:10px;
+      margin-top:8px;
     }
 
     button{
       flex:1;
-      padding:11px 12px;
+      padding:var(--btn-pad-y) var(--btn-pad-x);
       border-radius:12px;
       border:0;
       cursor:pointer;
       font-weight:800;
-      font-size:15px;
+      font-size:var(--btn-size);
       text-align:center;
-      min-width:140px;
       transition:all .25s ease;
     }
 
@@ -222,22 +254,22 @@
     }
 
     .result{
-      margin-top:10px;
+      margin-top:8px;
       padding:10px;
       border-radius:12px;
       border:1px solid rgba(255,255,255,.14);
       background:rgba(0,0,0,.20);
       display:none;
-      line-height:1.35;
-      font-size:14px;
+      line-height:1.3;
+      font-size:var(--result-size);
     }
 
     .fine{
-      margin-top:10px;
-      font-size:11px;
+      margin-top:8px;
+      font-size:var(--fine-size);
       opacity:.78;
       text-align:center;
-      line-height:1.4;
+      line-height:1.35;
     }
 
     a{
@@ -261,6 +293,97 @@
       background:rgba(255,255,255,.08);
       color:#fff;
       cursor:pointer;
+    }
+
+    /* medium laptops */
+    @media (max-height: 900px){
+      :root{
+        --hero-h:95px;
+        --logo-h:30px;
+        --title-size:16px;
+        --text-size:13px;
+        --tag-size:11px;
+        --tag-pad-y:6px;
+        --tag-pad-x:9px;
+        --card-pad:10px;
+        --wheel-size:min(255px,72vw);
+        --wheel-canvas:500;
+        --wheel-outer:225;
+        --wheel-inner:54;
+        --wheel-font:16px;
+        --spin-font:18px;
+        --btn-size:14px;
+        --btn-pad-y:10px;
+        --btn-pad-x:10px;
+        --result-size:13px;
+        --fine-size:10px;
+      }
+    }
+
+    /* shorter laptops */
+    @media (max-height: 800px){
+      :root{
+        --hero-h:82px;
+        --logo-h:26px;
+        --title-size:15px;
+        --text-size:12px;
+        --tag-size:10px;
+        --tag-pad-y:5px;
+        --tag-pad-x:8px;
+        --card-pad:9px;
+        --wheel-size:min(220px,62vw);
+        --wheel-canvas:440;
+        --wheel-outer:198;
+        --wheel-inner:48;
+        --wheel-font:14px;
+        --spin-font:16px;
+        --btn-size:13px;
+        --btn-pad-y:9px;
+        --btn-pad-x:8px;
+        --result-size:12px;
+        --fine-size:9px;
+      }
+
+      .subinfo{ gap:6px; margin-bottom:6px; }
+      .btnrow{ margin-top:6px; }
+      .fine{ margin-top:6px; }
+      .langbar{ margin-top:6px; }
+    }
+
+    /* very short screens */
+    @media (max-height: 700px){
+      :root{
+        --hero-h:68px;
+        --logo-h:22px;
+        --title-size:13px;
+        --text-size:11px;
+        --tag-size:9px;
+        --tag-pad-y:4px;
+        --tag-pad-x:7px;
+        --card-pad:8px;
+        --wheel-size:min(185px,52vw);
+        --wheel-canvas:380;
+        --wheel-outer:170;
+        --wheel-inner:42;
+        --wheel-font:12px;
+        --spin-font:14px;
+        --btn-size:12px;
+        --btn-pad-y:8px;
+        --btn-pad-x:8px;
+        --result-size:11px;
+        --fine-size:8px;
+      }
+
+      .top{ margin-bottom:4px; }
+      h1{ margin:4px 0; }
+      p{ margin:0 0 6px; }
+      .subinfo{ gap:5px; margin-bottom:5px; }
+      .wheel-area{ margin:2px 0; }
+      .pointer{
+        border-left-width:10px;
+        border-right-width:10px;
+        border-top-width:16px;
+      }
     }
   </style>
 </head>
@@ -298,7 +421,7 @@
 
       <div class="wheel-area">
         <div class="pointer"></div>
-        <canvas id="wheel" width="540" height="540"></canvas>
+        <canvas id="wheel"></canvas>
       </div>
 
       <div class="btnrow">
@@ -344,7 +467,6 @@
     const weights = [18, 17, 18, 16, 13, 18];
 
     const currentParams = new URLSearchParams(window.location.search);
-
     const claimUrlObj = new URL(CLAIM_URL);
     currentParams.forEach((v, k) => claimUrlObj.searchParams.set(k, v));
     document.getElementById("promoLink").href = claimUrlObj.toString();
@@ -363,16 +485,35 @@
     const claimBtn = document.getElementById("claimBtn");
     const resultBox = document.getElementById("resultBox");
 
-    const W = canvas.width;
-    const H = canvas.height;
-    const cx = W / 2;
-    const cy = H / 2;
-    const rOuter = 245;
-    const rInner = 58;
+    let W = 540;
+    let H = 540;
+    let cx = W / 2;
+    let cy = H / 2;
+    let rOuter = 245;
+    let rInner = 58;
 
     let angle = 0;
     let spinning = false;
     let landedIndex = null;
+
+    function cssVarNumber(name, fallback){
+      const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+      const num = parseFloat(value);
+      return Number.isFinite(num) ? num : fallback;
+    }
+
+    function resizeWheel(){
+      const size = cssVarNumber('--wheel-canvas', 540);
+      W = size;
+      H = size;
+      canvas.width = W;
+      canvas.height = H;
+      cx = W / 2;
+      cy = H / 2;
+      rOuter = cssVarNumber('--wheel-outer', 245);
+      rInner = cssVarNumber('--wheel-inner', 58);
+      drawWheel();
+    }
 
     function pickWeightedIndex(){
       const sum = weights.reduce((a, b) => a + b, 0);
@@ -393,6 +534,8 @@
       ctx.fill();
 
       const seg = (Math.PI * 2) / prizes.length;
+      const wheelFont = cssVarNumber('--wheel-font', 18);
+      const spinFont = cssVarNumber('--spin-font', 20);
 
       for (let i = 0; i < prizes.length; i++) {
         const start = angle + i * seg;
@@ -414,7 +557,7 @@
         ctx.rotate(start + seg / 2);
         ctx.textAlign = "right";
         ctx.fillStyle = "#fff";
-        ctx.font = "700 18px system-ui, -apple-system, Segoe UI, Roboto, Arial";
+        ctx.font = `700 ${wheelFont}px system-ui, -apple-system, Segoe UI, Roboto, Arial`;
         ctx.fillText(prizes[i], rOuter - 16, 6);
         ctx.restore();
       }
@@ -437,7 +580,7 @@
       ctx.stroke();
 
       ctx.fillStyle = "rgba(214,179,90,0.98)";
-      ctx.font = "900 20px system-ui, -apple-system, Segoe UI, Roboto, Arial";
+      ctx.font = `900 ${spinFont}px system-ui, -apple-system, Segoe UI, Roboto, Arial`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillText("SPIN", cx, cy);
@@ -524,7 +667,8 @@
       window.location.href = claimUrlObj.toString();
     });
 
-    drawWheel();
+    window.addEventListener("resize", resizeWheel);
+    resizeWheel();
   </script>
 </body>
 </html>
