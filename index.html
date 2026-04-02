@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Spin & Unlock Bonus | FunBet.Me</title>
-  <meta name="robots" content="noindex,nofollow" />
+  <meta name="robots" content="noindex,nofollow">
 
   <link rel="icon" href="https://funbet.me/favicon.ico" type="image/x-icon">
   <link rel="icon" type="image/png" sizes="32x32" href="https://funbet.me/content/wp-content/uploads/2025/12/favicon-32.png">
@@ -68,16 +68,6 @@
       height:auto;
       display:block;
       object-fit:cover;
-    }
-
-    @media (min-width:1024px){
-      .hero-img{max-height:260px;}
-    }
-    @media (max-width:1023px) and (min-width:600px){
-      .hero-img{max-height:220px;}
-    }
-    @media (max-width:599px){
-      .hero-img{max-height:160px;}
     }
 
     .top{
@@ -242,6 +232,9 @@
       background:var(--telegram);
       color:#fff;
       border:1px solid rgba(255,255,255,.15);
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
 
     .result{
@@ -287,7 +280,6 @@
     }
   </style>
 </head>
-
 <body>
   <div class="wrap">
     <div class="card">
@@ -297,7 +289,7 @@
           class="hero-img"
           src="https://funbet.me/content/wp-content/uploads/2026/03/Web-mar1-w2.png"
           alt="FunBet.Me Lucky Spin"
-        />
+        >
       </div>
 
       <div class="top">
@@ -305,7 +297,7 @@
           <img
             src="https://funbet.me/content/wp-content/uploads/2025/12/FUNBET.ME_FINAL_01072025-01.jpg"
             alt="FunBet.Me"
-          />
+          >
         </div>
         <div class="pill">18+ • Terms apply</div>
       </div>
@@ -327,8 +319,8 @@
       </div>
 
       <div class="btnrow">
-        <button class="spin" id="spinBtn">SPIN</button>
-        <button class="claim" id="claimBtn" disabled>Claim Bonus</button>
+        <button class="spin" id="spinBtn" type="button">SPIN</button>
+        <button class="claim" id="claimBtn" type="button" disabled>Claim Bonus</button>
         <a class="tg-btn" id="telegramBtn" href="https://t.me/FunBetDotMe" target="_blank" rel="noopener">Join Telegram</a>
       </div>
 
@@ -342,12 +334,12 @@
       </div>
 
       <div class="langbar" aria-label="Language">
-        <button class="langbtn" data-lang="">EN</button>
-        <button class="langbtn" data-lang="tr">TR</button>
-        <button class="langbtn" data-lang="in-en">IN-EN</button>
-        <button class="langbtn" data-lang="in-hi">IN-HI</button>
-        <button class="langbtn" data-lang="ru">RU</button>
-        <button class="langbtn" data-lang="pt-br">PT-BR</button>
+        <button class="langbtn" type="button" data-lang="">EN</button>
+        <button class="langbtn" type="button" data-lang="tr">TR</button>
+        <button class="langbtn" type="button" data-lang="in-en">IN-EN</button>
+        <button class="langbtn" type="button" data-lang="in-hi">IN-HI</button>
+        <button class="langbtn" type="button" data-lang="ru">RU</button>
+        <button class="langbtn" type="button" data-lang="pt-br">PT-BR</button>
       </div>
 
     </div>
@@ -383,7 +375,7 @@
     document.querySelectorAll(".langbtn").forEach(btn => {
       btn.addEventListener("click", () => {
         const lang = (btn.dataset.lang || "").trim();
-        const target = lang === "" ? `${BASE_PATH}/` : `${BASE_PATH}/${lang}/`;
+        const target = lang === "" ? BASE_PATH + "/" : BASE_PATH + "/" + lang + "/";
         window.location.href = target + (window.location.search || "");
       });
     });
@@ -480,13 +472,11 @@
 
     function enableClaimButton(){
       claimBtn.disabled = false;
-      claimBtn.removeAttribute("disabled");
       claimBtn.classList.add("active");
     }
 
     function disableClaimButton(){
       claimBtn.disabled = true;
-      claimBtn.setAttribute("disabled", "disabled");
       claimBtn.classList.remove("active");
     }
 
@@ -522,11 +512,9 @@
           const landedPrize = prizes[landedIndex];
 
           if (landedPrize === "Surprise Bonus") {
-            resultBox.innerHTML =
-              `🎉 <b>Surprise! You won 250% bonus + 100 Free Spins</b><br>Tap <b>Claim Bonus</b> now to continue to FunBet.Me.`;
+            resultBox.innerHTML = "🎉 <b>Surprise! You won 250% bonus + 100 Free Spins</b><br>Tap <b>Claim Bonus</b> now to continue to FunBet.Me.";
           } else {
-            resultBox.innerHTML =
-              `✅ <b>Unlocked:</b> ${landedPrize}<br>Tap <b>Claim Bonus</b> to continue to FunBet.Me Promotions, or join Telegram for more offers.`;
+            resultBox.innerHTML = "✅ <b>Unlocked:</b> " + landedPrize + "<br>Tap <b>Claim Bonus</b> to continue to FunBet.Me Promotions, or join Telegram for more offers.";
           }
 
           resultBox.style.display = "block";
